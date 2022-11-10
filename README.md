@@ -6,4 +6,7 @@
  - java 11
 
 ### 진행 상황
- - 회원가입 (Security는 나중에 적용 예정)
+ - 회원 (Security는 나중에 적용 예정)
+   - 간단한 회원가입 (email, username, password) - 아직 암호화 안함
+   - 회원 목록 조회 (완료)
+   - 패스워드 암호화

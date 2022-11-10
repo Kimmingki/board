@@ -1,13 +1,11 @@
 package com.practice.board.dto;
 
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class MemberFormDTO {
+public class MemberSaveRequestDTO {
 
     private String email;
     private String username;
