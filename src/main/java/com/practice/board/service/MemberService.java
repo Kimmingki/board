@@ -3,8 +3,10 @@ package com.practice.board.service;
 
 import com.practice.board.dto.MemberSaveRequestDTO;
 import com.practice.board.dto.MemberResponseDTO;
+import org.springframework.validation.Errors;
 
 import java.util.List;
+import java.util.Map;
 
 public interface MemberService {
 
@@ -20,4 +22,11 @@ public interface MemberService {
      * @return 회원 정보 목록
      */
     List<MemberResponseDTO> findMembers();
+
+    /**
+     * 회원가입 시, 유효성 및 중복 검사
+     * @param errors
+     * @return
+     */
+    Map<String, String> validateHandling(Errors errors);
 }

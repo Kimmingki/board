@@ -8,9 +8,14 @@ import com.practice.board.service.MemberService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+import org.springframework.validation.Errors;
+import org.springframework.validation.FieldError;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @Service
 @RequiredArgsConstructor
@@ -19,21 +24,23 @@ public class MemberServiceImpl implements MemberService {
     private final MemberRepository memberRepository;
     private final PasswordEncoder passwordEncoder;
 
-    /**
-     * 회원 중복체크
-     * @param email 회원 이메일
-     */
-    private void validateDuplicateMember(String email) {
-        memberRepository.findByEmail(email)
-                .ifPresent((m -> {
-                    throw new IllegalStateException("이미 존재하는 회원입니다.");
-                }));
+    /* 회원가입 시, 유효성 및 중복 검사 */
+    @Transactional(readOnly = true)
+    @Override
+    public Map<String, String> validateHandling(Errors errors) {
+        Map<String, String> validatorResult = new HashMap<>();
+
+        /* 유효성 및 중복 검사에 실패한 필드 목록을 받음 */
+        for (FieldError error : errors.getFieldErrors()) {
+            String validKeyName = String.format("valid_%s", error.getField());
+            validatorResult.put(validKeyName, error.getDefaultMessage());
+        }
+
+        return validatorResult;
     }
 
     @Override
     public Long join(MemberSaveRequestDTO memberSaveRequestDTO) {
-        validateDuplicateMember(memberSaveRequestDTO.getEmail());   // 중복 회원 검증
-
         memberSaveRequestDTO.setPassword(passwordEncoder.encode(memberSaveRequestDTO.getPassword()));
 
         Member member = Member.builder()

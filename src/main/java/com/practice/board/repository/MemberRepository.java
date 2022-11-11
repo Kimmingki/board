@@ -13,4 +13,11 @@ public interface MemberRepository extends JpaRepository<Member, Long> {
      * @return
      */
     Optional<Member> findByEmail(String email);
+
+    /**
+     * 유효성 검사 - 중복 체크
+     * @param email 회원 이메일
+     * @return
+     */
+    boolean existsByEmail(String email);
 }
