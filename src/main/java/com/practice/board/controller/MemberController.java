@@ -18,11 +18,20 @@ public class MemberController {
 
     private final MemberService memberService;
 
+    /**
+     * Home 화면
+     * @return 홈페이지
+     */
     @GetMapping("/")
     public String Home() {
         return "home";
     }
 
+    /**
+     * 회원 목록 조회
+     * @param model
+     * @return 회원 목록 페이지
+     */
     @GetMapping("/members")
     public String members(Model model) {
         List<MemberResponseDTO> members = memberService.findMembers();
@@ -31,11 +40,20 @@ public class MemberController {
         return "/members/memberList";
     }
 
+    /**
+     * 회원 가입
+     * @return 회원 가입 페이지
+     */
     @GetMapping("/members/new")
     public String createMemberForm() {
         return "members/createMemberForm";
     }
 
+    /**
+     * 회원 가입 post
+     * @param memberSaveRequestDTO 회원 정보
+     * @return 홈페이지
+     */
     @PostMapping("/members/new")
     public String createMember(MemberSaveRequestDTO memberSaveRequestDTO) {
         Long memberId = memberService.join(memberSaveRequestDTO);
