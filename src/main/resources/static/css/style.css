@@ -9,3 +9,11 @@ table {
 th,td {
     border: 1px solid #444;
 }
+
+.btn_register {
+    padding: 8px 20px;
+    border-radius: 10px;
+    border: 1px solid #444;
+    margin-top: 10px;
+    margin-bottom: 20px;
+}

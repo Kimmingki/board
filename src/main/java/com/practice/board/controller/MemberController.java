@@ -34,6 +34,7 @@ public class MemberController {
 
     /**
      * Home 화면
+     *
      * @return 홈페이지
      */
     @GetMapping("/")
@@ -43,6 +44,7 @@ public class MemberController {
 
     /**
      * 회원 목록 조회
+     *
      * @param model
      * @return 회원 목록 페이지
      */
@@ -56,6 +58,7 @@ public class MemberController {
 
     /**
      * 회원 가입
+     *
      * @return 회원 가입 페이지
      */
     @GetMapping("/members/new")
@@ -65,6 +68,7 @@ public class MemberController {
 
     /**
      * 회원 가입 post
+     *
      * @param memberSaveRequestDTO 회원 정보
      * @return 홈페이지
      */
@@ -89,4 +93,7 @@ public class MemberController {
 
         return "home";
     }
+
+    @PostMapping("/login")
+    public String login(@Valid )
 }
