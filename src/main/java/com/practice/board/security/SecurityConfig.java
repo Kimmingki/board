@@ -20,9 +20,18 @@ public class SecurityConfig {
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         http.cors().disable()                               // cors 방지
-                .csrf().disable()                           // csrf 방지
-                .formLogin().disable()                      // 기본 로그인 페이지 없애기
-                .headers().frameOptions().disable();
+                .csrf().disable();                          // csrf 방지
+//                .formLogin().disable()
+//                .headers().frameOptions().disable();
+
+        http.authorizeRequests()
+                // TODO: member role 추가하고 권한별로 페이지 설정
+                .anyRequest().permitAll()
+                .and()
+                .formLogin()
+                .loginPage("/loginForm")
+                .loginProcessingUrl("/login")
+                .defaultSuccessUrl("/");
 
         return http.build();
     }

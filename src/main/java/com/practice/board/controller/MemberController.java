@@ -1,5 +1,6 @@
 package com.practice.board.controller;
 
+import com.practice.board.dto.MemberLoginDTO;
 import com.practice.board.dto.MemberResponseDTO;
 import com.practice.board.dto.MemberSaveRequestDTO;
 import com.practice.board.service.MemberService;
@@ -62,8 +63,8 @@ public class MemberController {
      * @return 회원 가입 페이지
      */
     @GetMapping("/members/new")
-    public String createMemberForm() {
-        return "members/createMemberForm";
+    public String memberForm() {
+        return "members/memberForm";
     }
 
     /**
@@ -86,7 +87,7 @@ public class MemberController {
             }
 
             /* 회원가입 페이지로 리턴 */
-            return "/members/createMemberForm";
+            return "memberForm";
         }
 
         memberService.join(memberSaveRequestDTO);
@@ -94,6 +95,15 @@ public class MemberController {
         return "home";
     }
 
+    @GetMapping("/login")
+    public String loginForm() {
+        return "loginForm";
+    }
+
     @PostMapping("/login")
-    public String login(@Valid )
+    public String login(@Valid MemberLoginDTO memberLoginDTO) {
+        // TODO: login 로직 구현
+
+        return "home";
+    }
 }
