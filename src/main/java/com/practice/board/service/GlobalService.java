@@ -1,13 +1,11 @@
 package com.practice.board.service;
 
-import com.practice.board.dto.MemberLoginDTO;
-import com.practice.board.dto.MemberResponseDTO;
 import com.practice.board.dto.MemberSaveRequestDTO;
 import org.springframework.validation.Errors;
 
 import java.util.Map;
 
-public interface GlobalServcie {
+public interface GlobalService {
 
     /**
      * 회원가입 시, 유효성 및 중복 검사
@@ -22,12 +20,4 @@ public interface GlobalServcie {
      * @return 회원 id
      */
     Long join(MemberSaveRequestDTO memberSaveRequestDTO);
-
-
-    /**
-     * 로그인
-     * @param memberLoginDTO 로그인 정보
-     * @return
-     */
-    MemberResponseDTO login(MemberLoginDTO memberLoginDTO);
 }

@@ -2,7 +2,7 @@ package com.practice.board.controller;
 
 import com.practice.board.dto.MemberLoginDTO;
 import com.practice.board.dto.MemberSaveRequestDTO;
-import com.practice.board.service.GlobalServcie;
+import com.practice.board.service.GlobalService;
 import com.practice.board.validator.CheckEmailValidator;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -22,7 +22,7 @@ import java.util.Map;
 @Slf4j
 public class GlobalController {
 
-    private final GlobalServcie globalServcie;
+    private final GlobalService globalService;
     private final CheckEmailValidator checkEmailValidator;
 
     /* 유효성 검증 */
@@ -32,7 +32,7 @@ public class GlobalController {
     }
 
     public void messageHandling(Errors errors, Model model) {
-        Map<String, String> validatorResult = globalServcie.validateHandling(errors);
+        Map<String, String> validatorResult = globalService.validateHandling(errors);
         for (String key : validatorResult.keySet()) {
             model.addAttribute(key, validatorResult.get(key));
         }
@@ -75,7 +75,7 @@ public class GlobalController {
             /* 회원가입 페이지로 리턴 */
             return "/members/memberForm";
         }
-        globalServcie.join(memberSaveRequestDTO);
+        globalService.join(memberSaveRequestDTO);
 
         return "home";
     }
