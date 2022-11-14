@@ -31,6 +31,13 @@ public class GlobalController {
         binder.addValidators(checkEmailValidator);
     }
 
+    public void messageHandling(Errors errors, Model model) {
+        Map<String, String> validatorResult = globalServcie.validateHandling(errors);
+        for (String key : validatorResult.keySet()) {
+            model.addAttribute(key, validatorResult.get(key));
+        }
+    }
+
     /**
      * Home 화면
      *
@@ -47,7 +54,7 @@ public class GlobalController {
      * @return 회원 가입 페이지
      */
     @GetMapping("/signup")
-    public String memberForm() {
+    public String signupForm() {
         return "members/memberForm";
     }
 
@@ -58,22 +65,16 @@ public class GlobalController {
      * @return 홈페이지
      */
     @PostMapping("/signup")
-    public String createMember(@Valid MemberSaveRequestDTO memberSaveRequestDTO, Errors errors, Model model) {
+    public String signup(@Valid MemberSaveRequestDTO memberSaveRequestDTO, Errors errors, Model model) {
         /* 검증 */
         if (errors.hasErrors()) {
             /* 회원가입 실패 시 입력 데이터 유지 */
             model.addAttribute("dto", memberSaveRequestDTO);
-
             /* 유효성 검사를 통과하지 못한 필드와 메세지 핸들링 */
-            Map<String, String> validatorResult = globalServcie.validateHandling(errors);
-            for (String key : validatorResult.keySet()) {
-                model.addAttribute(key, validatorResult.get(key));
-            }
-
+            messageHandling(errors, model);
             /* 회원가입 페이지로 리턴 */
             return "/members/memberForm";
         }
-
         globalServcie.join(memberSaveRequestDTO);
 
         return "home";
@@ -94,7 +95,16 @@ public class GlobalController {
      * @return
      */
     @PostMapping("/login")
-    public String login(@Valid MemberLoginDTO memberLoginDTO) {
+    public String login(@Valid MemberLoginDTO memberLoginDTO, Errors errors, Model model) {
+        /* 검증 */
+        if (errors.hasErrors()) {
+            /* 로그인 실패 시 입력 데이터 유지 */
+            model.addAttribute("dto", memberLoginDTO);
+            /* 유효성 검사를 통과하지 못한 필드와 메세지 핸들링 */
+            messageHandling(errors, model);
+            /* 로그인 페이지로 리턴 */
+            return "loginForm";
+        }
         // TODO: login 로직 구현
 
         return "home";

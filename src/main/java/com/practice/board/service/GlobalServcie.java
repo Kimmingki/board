@@ -1,5 +1,7 @@
 package com.practice.board.service;
 
+import com.practice.board.dto.MemberLoginDTO;
+import com.practice.board.dto.MemberResponseDTO;
 import com.practice.board.dto.MemberSaveRequestDTO;
 import org.springframework.validation.Errors;
 
@@ -15,9 +17,17 @@ public interface GlobalServcie {
     Map<String, String> validateHandling(Errors errors);
 
     /**
-     * 회원 가입
+     * 회원가입
      * @param memberSaveRequestDTO 회원 정보 DTO
      * @return 회원 id
      */
     Long join(MemberSaveRequestDTO memberSaveRequestDTO);
+
+
+    /**
+     * 로그인
+     * @param memberLoginDTO 로그인 정보
+     * @return
+     */
+    MemberResponseDTO login(MemberLoginDTO memberLoginDTO);
 }

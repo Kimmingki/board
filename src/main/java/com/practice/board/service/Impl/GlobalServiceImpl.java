@@ -2,6 +2,8 @@ package com.practice.board.service.Impl;
 
 import com.practice.board.domain.Member;
 import com.practice.board.domain.Role;
+import com.practice.board.dto.MemberLoginDTO;
+import com.practice.board.dto.MemberResponseDTO;
 import com.practice.board.dto.MemberSaveRequestDTO;
 import com.practice.board.repository.MemberRepository;
 import com.practice.board.service.GlobalServcie;
@@ -22,7 +24,7 @@ public class GlobalServiceImpl implements GlobalServcie {
     private final MemberRepository memberRepository;
     private final PasswordEncoder passwordEncoder;
 
-    /* 회원가입 시, 유효성 및 중복 검사 */
+    /* 유효성 및 중복 검사 */
     @Transactional(readOnly = true)
     @Override
     public Map<String, String> validateHandling(Errors errors) {
@@ -49,5 +51,18 @@ public class GlobalServiceImpl implements GlobalServcie {
                 .build();
 
         return memberRepository.save(member).getId();
+    }
+
+    @Override
+    public MemberResponseDTO login(MemberLoginDTO memberLoginDTO) {
+        Member member = memberRepository.findByEmail(memberLoginDTO.getEmail())
+                .filter(m -> m.getPassword().equals(passwordEncoder.encode(memberLoginDTO.getPassword())))
+                .orElseThrow(() -> new IllegalArgumentException("이메일 혹은 비밀번호가 잘못되었습니다."));
+
+        MemberResponseDTO build = MemberResponseDTO.builder()
+                .member(member)
+                .build();
+
+        return build;
     }
 }
