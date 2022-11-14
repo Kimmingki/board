@@ -20,13 +20,14 @@ public class SecurityConfig {
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         http.cors().disable()                               // cors 방지
-                .csrf().disable();                          // csrf 방지
-//                .formLogin().disable()
-//                .headers().frameOptions().disable();
+                .csrf().disable()                           // csrf 방지
+                .headers().frameOptions().disable();        // x frame 방어 해제
+
 
         http.authorizeRequests()
                 // TODO: member role 추가하고 권한별로 페이지 설정
-                .anyRequest().permitAll()
+                .antMatchers("/**").permitAll()
+//                .antMatchers("/member/**").hasRole("ROLE_USER")
                 .and()
                 .formLogin()
                 .loginPage("/loginForm")

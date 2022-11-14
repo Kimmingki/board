@@ -13,13 +13,15 @@ https://magicmk.tistory.com/category/Java/spring%20%EA%B2%8C%EC%8B%9C%ED%8C%90
 
 ---
 ### 진행 상황
+ - 전체
+   - url security 적용
  - 회원
    - 간단한 회원가입 (email, username, password)
      - 패스워드 암호화 (완료)
      - 이메일 중복체크, 유효성 검사 (완료)
    - 조회
      - 회원 목록 (완료)
-     - 특정 회원
-   - 로그인
+   - 로그인 / 로그아웃
      - 패스워드 암호화
+ - 게시물
    

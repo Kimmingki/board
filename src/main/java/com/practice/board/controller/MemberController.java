@@ -25,23 +25,6 @@ import java.util.Map;
 public class MemberController {
 
     private final MemberService memberService;
-    private final CheckEmailValidator checkEmailValidator;
-
-    /* 유효성 검증 */
-    @InitBinder
-    public void validatorBinder(WebDataBinder binder) {
-        binder.addValidators(checkEmailValidator);
-    }
-
-    /**
-     * Home 화면
-     *
-     * @return 홈페이지
-     */
-    @GetMapping("/")
-    public String Home() {
-        return "home";
-    }
 
     /**
      * 회원 목록 조회
@@ -49,61 +32,11 @@ public class MemberController {
      * @param model
      * @return 회원 목록 페이지
      */
-    @GetMapping("/members")
+    @GetMapping("/member/list")
     public String members(Model model) {
         List<MemberResponseDTO> members = memberService.findMembers();
         model.addAttribute("members", members);
 
         return "/members/memberList";
-    }
-
-    /**
-     * 회원 가입
-     *
-     * @return 회원 가입 페이지
-     */
-    @GetMapping("/members/new")
-    public String memberForm() {
-        return "members/memberForm";
-    }
-
-    /**
-     * 회원 가입 post
-     *
-     * @param memberSaveRequestDTO 회원 정보
-     * @return 홈페이지
-     */
-    @PostMapping("/members/new")
-    public String createMember(@Valid MemberSaveRequestDTO memberSaveRequestDTO, Errors errors, Model model) {
-        /* 검증 */
-        if (errors.hasErrors()) {
-            /* 회원가입 실패 시 입력 데이터 유지 */
-            model.addAttribute("dto", memberSaveRequestDTO);
-
-            /* 유효성 검사를 통과하지 못한 필드와 메세지 핸들링 */
-            Map<String, String> validatorResult = memberService.validateHandling(errors);
-            for (String key : validatorResult.keySet()) {
-                model.addAttribute(key, validatorResult.get(key));
-            }
-
-            /* 회원가입 페이지로 리턴 */
-            return "memberForm";
-        }
-
-        memberService.join(memberSaveRequestDTO);
-
-        return "home";
-    }
-
-    @GetMapping("/login")
-    public String loginForm() {
-        return "loginForm";
-    }
-
-    @PostMapping("/login")
-    public String login(@Valid MemberLoginDTO memberLoginDTO) {
-        // TODO: login 로직 구현
-
-        return "home";
     }
 }
