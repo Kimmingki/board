@@ -8,6 +8,9 @@
 <body>
 <div class="container">
   <section id="content">
+    <div th:if="${param.error}">
+      이메일 혹은 비밀번호가 잘못되었습니다.
+    </div>
     <form action="/login" method="post">
       <h1>Login Form</h1>
       <div>
@@ -29,14 +32,6 @@
   const error = [[${error}]];
   const exception = [[${exception}]];
   /*]]>*/
-
-  if (error != null) {
-    console.log(error);
-  }
-
-  if (exception != null) {
-    console.log(exception);
-  }
 </script>
 </body>
 </html>

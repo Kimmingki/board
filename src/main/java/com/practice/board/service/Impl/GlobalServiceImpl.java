@@ -4,12 +4,8 @@ import com.practice.board.domain.Member;
 import com.practice.board.domain.Role;
 import com.practice.board.dto.MemberSaveRequestDTO;
 import com.practice.board.repository.MemberRepository;
-import com.practice.board.security.PrincipalDetails;
 import com.practice.board.service.GlobalService;
 import lombok.RequiredArgsConstructor;
-import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.security.core.userdetails.UserDetailsService;
-import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -21,7 +17,7 @@ import java.util.Map;
 
 @Service
 @RequiredArgsConstructor
-public class GlobalServiceImpl implements GlobalService, UserDetailsService {
+public class GlobalServiceImpl implements GlobalService {
 
     private final MemberRepository memberRepository;
     private final PasswordEncoder passwordEncoder;
@@ -53,22 +49,5 @@ public class GlobalServiceImpl implements GlobalService, UserDetailsService {
                 .build();
 
         return memberRepository.save(member).getId();
-    }
-
-    /**
-     * 로그인 서비스
-     * @param email the username identifying the user whose data is required.
-     * @return
-     * @throws UsernameNotFoundException
-     */
-    @Override
-    public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
-//        Member member = memberRepository.findByEmail(email).orElseThrow(() -> new UsernameNotFoundException("존재하지 않는 이메일 입니다."));
-//
-//        MemberResponseDTO result = MemberResponseDTO.builder()
-//                .member(member)
-//                .build();
-
-        return new PrincipalDetails(memberRepository.findByEmail(email).orElseThrow(() -> new UsernameNotFoundException("존재하지 않는 이메일입니다.")));
     }
 }
