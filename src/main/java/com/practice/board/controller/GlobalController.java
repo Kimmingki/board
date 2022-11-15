@@ -13,6 +13,7 @@ import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import javax.validation.Valid;
 import java.util.Map;
@@ -85,28 +86,12 @@ public class GlobalController {
      * @return
      */
     @GetMapping("/login")
-    public String loginForm() {
+    public String loginForm(Model model,
+                            @RequestParam(value = "error", required = false) String error,
+                            @RequestParam(value = "exception", required = false) String exception) {
+        model.addAttribute("error", error);
+        model.addAttribute("exception", exception);
+
         return "loginForm";
-    }
-
-    /**
-     * 로그인 post
-     * @param memberLoginDTO 로그인 정보
-     * @return
-     */
-    @PostMapping("/login")
-    public String login(@Valid MemberLoginDTO memberLoginDTO, Errors errors, Model model) {
-        /* 검증 */
-        if (errors.hasErrors()) {
-            /* 로그인 실패 시 입력 데이터 유지 */
-            model.addAttribute("dto", memberLoginDTO);
-            /* 유효성 검사를 통과하지 못한 필드와 메세지 핸들링 */
-            messageHandling(errors, model);
-            /* 로그인 페이지로 리턴 */
-            return "loginForm";
-        }
-        // TODO: login 로직 구현
-
-        return "home";
     }
 }

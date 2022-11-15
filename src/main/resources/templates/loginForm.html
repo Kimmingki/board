@@ -8,25 +8,10 @@
 <body>
 <div class="container">
   <section id="content">
-    <form action="/login" method="post" th:if="${dto == null}">
+    <form action="/login" method="post">
       <h1>Login Form</h1>
       <div>
         <input type="text" placeholder="Email" id="email" name="email" required />
-      </div>
-      <div>
-        <input type="password" placeholder="Password" id="password" name="password" required />
-      </div>
-      <div>
-        <input type="submit" value="Log in" />
-        <a href="#">Lost your password?</a>
-        <a href="/signup">Register</a>
-      </div>
-    </form>
-    <form action="/login" method="post" th:if="${dto}">
-      <h1>Login Form</h1>
-      <div>
-        <input type="text" placeholder="Email" id="email" name="email" required />
-        <span id="valid" th:text="${valid_email}"></span>
       </div>
       <div>
         <input type="password" placeholder="Password" id="password" name="password" required />
@@ -39,5 +24,19 @@
     </form>
   </section>
 </div>
+<script th:inline="javascript">
+  /*<![CDATA[*/
+  const error = [[${error}]];
+  const exception = [[${exception}]];
+  /*]]>*/
+
+  if (error != null) {
+    console.log(error);
+  }
+
+  if (exception != null) {
+    console.log(exception);
+  }
+</script>
 </body>
 </html>
