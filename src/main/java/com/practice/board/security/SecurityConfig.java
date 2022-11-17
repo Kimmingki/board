@@ -35,7 +35,7 @@ public class SecurityConfig {
 
         http.authorizeRequests()
                 // 페이지 권한 설정
-                .antMatchers("/member/**").hasRole("USER")
+                .antMatchers("/member/**").hasRole("user")
                 .anyRequest().permitAll();
 
         http.formLogin()

@@ -45,7 +45,7 @@ public class GlobalServiceImpl implements GlobalService {
                 .email(memberSaveRequestDTO.getEmail())
                 .username(memberSaveRequestDTO.getUsername())
                 .password(memberSaveRequestDTO.getPassword())
-                .role(Role.USER)
+                .role(Role.ROLE_USER)
                 .build();
 
         return memberRepository.save(member).getId();

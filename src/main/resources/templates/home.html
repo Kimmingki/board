@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <head>
     <meta charset="UTF-8">
     <link rel="stylesheet" type="text/css" th:href="@{/css/style.css}">
@@ -7,12 +7,12 @@
 </head>
 <body>
 <div class="container">
-    <div th:if="${session.get(name) != null}">
-        <h2 th:text="${session.get(name)}"></h2>
+    <div sec:authorize="hasRole('ROLE_USER')">
+        <h2 sec:authentication="name">사용자</h2>
         <a href="/member/list">회원목록</a>
         <a href="/logout">로그아웃</a>
     </div>
-    <div th:unless="${session.get(name) != null}">
+    <div sec:authorize="!isAuthenticated()">
         <a href="/login">로그인</a>
     </div>
 </div>
