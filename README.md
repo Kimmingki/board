@@ -19,9 +19,10 @@ https://magicmk.tistory.com/category/Java/spring%20%EA%B2%8C%EC%8B%9C%ED%8C%90
    - 간단한 회원가입 (email, username, password)
      - 패스워드 암호화 (완료)
      - 이메일 중복체크, 유효성 검사 (완료)
+     - 비밀번호 찾기
    - 조회
      - 회원 목록 (완료)
    - 로그인 / 로그아웃
-     - spring security login 활용 (진행중)
+     - spring security login 활용 (진행중 죽여 진짜)
  - 게시물
    

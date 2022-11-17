@@ -12,7 +12,6 @@ import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 
 import javax.validation.Valid;
 import java.util.Map;
@@ -46,6 +45,15 @@ public class GlobalController {
     @GetMapping("/")
     public String Home() {
         return "home";
+    }
+
+    /**
+     * 예외처리 페이지
+     * @return
+     */
+    @GetMapping("/denied")
+    public String doDenied() {
+        return "denied";
     }
 
     /**
@@ -85,12 +93,7 @@ public class GlobalController {
      * @return
      */
     @GetMapping("/login")
-    public String loginForm(Model model,
-                            @RequestParam(value = "error", required = false) String error,
-                            @RequestParam(value = "exception", required = false) String exception) {
-        model.addAttribute("error", error);
-        model.addAttribute("exception", exception);
-
+    public String loginForm() {
         return "loginForm";
     }
 }
