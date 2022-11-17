@@ -7,8 +7,18 @@
 </head>
 <body>
 <div class="container">
-    <a href="/login">로그인</a>
-    <a href="/member/list">회원목록</a>
+    <div th:if="${param.email != null}">
+        <h2 th:text="Welcome ${param.email}"></h2>
+        <form th:action="@{/logout}" method="post">
+            <input type="submit" value="Logout">
+        </form>
+
+        <a href="/member/list">회원목록</a>
+    </div>
+
+    <div th:if="${param.email == null}">
+        <a href="/login">로그인</a>
+    </div>
 </div>
 </body>
 </html>

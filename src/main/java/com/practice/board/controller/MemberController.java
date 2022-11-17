@@ -1,23 +1,14 @@
 package com.practice.board.controller;
 
-import com.practice.board.dto.MemberLoginDTO;
 import com.practice.board.dto.MemberResponseDTO;
-import com.practice.board.dto.MemberSaveRequestDTO;
 import com.practice.board.service.MemberService;
-import com.practice.board.validator.CheckEmailValidator;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.validation.Errors;
-import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.InitBinder;
-import org.springframework.web.bind.annotation.PostMapping;
 
-import javax.validation.Valid;
 import java.util.List;
-import java.util.Map;
 
 @Controller
 @RequiredArgsConstructor
