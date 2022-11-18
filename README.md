@@ -15,7 +15,7 @@ https://magicmk.tistory.com/category/Java/spring%20%EA%B2%8C%EC%8B%9C%ED%8C%90
 ### 진행 상황
  - 전체
    - url security 적용 (완료)
-   - authorize 적용 (진행중)
+   - authorize 적용 (완료)
  - 회원
    - 간단한 회원가입 (email, username, password)
      - 패스워드 암호화 (완료)

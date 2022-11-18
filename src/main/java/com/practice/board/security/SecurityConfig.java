@@ -35,7 +35,8 @@ public class SecurityConfig {
 
         http.authorizeRequests()
                 // 페이지 권한 설정
-                .antMatchers("/member/**").hasRole("user")
+                .antMatchers("/member/**").hasRole("USER")
+                .antMatchers("/board/**").hasRole("USER")
                 .anyRequest().permitAll();
 
         http.formLogin()
@@ -47,7 +48,7 @@ public class SecurityConfig {
                     .passwordParameter("password")
                 .and()
                     .logout()
-                    .logoutSuccessUrl("/login?logout=true")
+                    .logoutSuccessUrl("/?logout=true")
                     .invalidateHttpSession(true)
                     .deleteCookies("JSESSIONID");
 

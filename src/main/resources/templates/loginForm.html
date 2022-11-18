@@ -11,9 +11,6 @@
     <div th:if="${param.error}">
       이메일 혹은 비밀번호가 잘못되었습니다.
     </div>
-    <div th:if="${param.logout}">
-      로그아웃 되었습니다.
-    </div>
     <form th:action="@{/login}" method="post">
       <h1>Login Form</h1>
       <div>
