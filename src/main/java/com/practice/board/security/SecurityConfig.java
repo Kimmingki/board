@@ -37,6 +37,7 @@ public class SecurityConfig {
                 // 페이지 권한 설정
                 .antMatchers("/member/**").hasRole("USER")
                 .antMatchers("/board/**").hasRole("USER")
+                .antMatchers("/login", "/signup").anonymous()
                 .anyRequest().permitAll();
 
         http.formLogin()
