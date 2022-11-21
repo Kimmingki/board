@@ -1,15 +1,17 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout/default}">
 <head>
-    <meta charset="UTF-8">
-    <link rel="stylesheet" type="text/css" th:href="@{/css/style.css}">
     <title>Home</title>
 </head>
 <body>
-<div class="container">
+<div class="container" layout:fragment="content">
     <div sec:authorize="hasRole('USER')">
         <h2 sec:authentication="name">사용자</h2>
         <a href="/member/list">회원목록</a>
+        <a href="/member/info">회원정보</a>
         <a href="/logout">로그아웃</a>
     </div>
     <div sec:authorize="anonymous">

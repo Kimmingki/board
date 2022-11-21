@@ -1,26 +1,28 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout/default}">
 <head>
-    <meta charset="UTF-8">
-    <link rel="stylesheet" type="text/css" th:href="@{/css/style.css}">
     <title>회원 목록 조회</title>
 </head>
 <body>
-<h1>회원 목록</h1>
-<a href="/">집으로~</a>
-<table>
-    <thead>
-    <tr>
-        <th>email</th>
-        <th>username</th>
-    </tr>
-    </thead>
-    <tbody>
-    <tr th:each="member : ${members}">
-        <td th:text="${member.email}">#</td>
-        <td th:text="${member.username}">#</td>
-    </tr>
-    </tbody>
-</table>
+<div layout:fragment="content">
+    <h1>회원 목록</h1>
+    <a href="/">집으로~</a>
+    <table>
+        <thead>
+        <tr>
+            <th>email</th>
+            <th>username</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="member : ${members}">
+            <td th:text="${member.email}">#</td>
+            <td th:text="${member.username}">#</td>
+        </tr>
+        </tbody>
+    </table>
+</div>
 </body>
 </html>
