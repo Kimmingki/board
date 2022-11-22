@@ -1,4 +1,4 @@
-package com.practice.board.dto;
+package com.practice.board.dto.member;
 
 import lombok.*;
 

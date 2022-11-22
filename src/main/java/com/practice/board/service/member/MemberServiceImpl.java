@@ -1,9 +1,8 @@
-package com.practice.board.service.Impl;
+package com.practice.board.service.member;
 
 import com.practice.board.domain.Member;
-import com.practice.board.dto.MemberResponseDTO;
+import com.practice.board.dto.member.MemberResponseDTO;
 import com.practice.board.repository.MemberRepository;
-import com.practice.board.service.MemberService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;

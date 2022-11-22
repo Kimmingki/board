@@ -3,29 +3,29 @@
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
       layout:decorate="~{layout/default}">
 <head>
-  <title>Log In</title>
+    <title>로그인</title>
 </head>
 <body>
 <div class="container" layout:fragment="content">
-  <section id="content">
-    <div th:if="${param.error}">
-      이메일 혹은 비밀번호가 잘못되었습니다.
-    </div>
-    <form th:action="@{/login}" method="post">
-      <h1>Login Form</h1>
-      <div>
-        <input type="text" placeholder="Email" id="email" name="email" required />
-      </div>
-      <div>
-        <input type="password" placeholder="Password" id="password" name="password" required />
-      </div>
-      <div>
-        <input type="submit" value="Log in" />
-        <a href="#">Lost your password?</a>
-        <a href="/signup">Register</a>
-      </div>
-    </form>
-  </section>
+    <section id="content">
+        <div th:if="${param.error}">
+            이메일 혹은 비밀번호가 잘못되었습니다.
+        </div>
+        <form th:action="@{/login}" method="post">
+            <h1>Login Form</h1>
+            <div>
+                <input type="text" placeholder="Email" id="email" name="email" required />
+            </div>
+            <div>
+                <input type="password" placeholder="Password" id="password" name="password" required />
+            </div>
+            <div>
+                <input type="submit" value="Log in" />
+                <a href="#">Lost your password?</a>
+                <a href="/signup">Register</a>
+            </div>
+        </form>
+    </section>
 </div>
 </body>
 </html>

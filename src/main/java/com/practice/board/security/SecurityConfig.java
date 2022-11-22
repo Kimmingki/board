@@ -49,7 +49,7 @@ public class SecurityConfig {
                     .passwordParameter("password")
                 .and()
                     .logout()
-                    .logoutSuccessUrl("/?logout=true")
+                    .logoutSuccessUrl("/")
                     .invalidateHttpSession(true)
                     .deleteCookies("JSESSIONID");
 

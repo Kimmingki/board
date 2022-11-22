@@ -1,7 +1,7 @@
 package com.practice.board.controller;
 
-import com.practice.board.dto.MemberResponseDTO;
-import com.practice.board.service.MemberService;
+import com.practice.board.dto.member.MemberResponseDTO;
+import com.practice.board.service.member.MemberService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.core.Authentication;
@@ -52,8 +52,20 @@ public class MemberController {
         return "/members/info";
     }
 
+    /**
+     * 회원 정보 수정
+     * @param model
+     * @param authentication 인증 정보
+     * @return 회원 정보 수정 페이지
+     */
     @GetMapping("/update")
-    public String updateMember(Model model, Authentication authentication) {
+    public String updateForm(Model model, Authentication authentication) {
+        UserDetails userDetails = (UserDetails) authentication.getPrincipal();
+
+        MemberResponseDTO member = memberService.findMember(userDetails.getUsername());
+
+        model.addAttribute("member", member);
+
         return "/members/update";
     }
 }

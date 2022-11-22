@@ -1,6 +1,6 @@
 package com.practice.board.service;
 
-import com.practice.board.dto.MemberSaveRequestDTO;
+import com.practice.board.dto.member.MemberSaveRequestDTO;
 import org.springframework.validation.Errors;
 
 import java.util.Map;

@@ -6,50 +6,61 @@
     <title>회원가입</title>
 </head>
 <body>
-<div class="container" layout:fragment="content">
-    <section id="content">
-        <form method="post" th:if="${dto == null}">
-            <div class="form_group" >
-                <input type="text" id="username" name="username" placeholder="닉네임을 입력하세요.">
-                <span id="valid" th:text="${valid_username}"></span>
+<div layout:fragment="content" th:class="container">
+    <form method="post" th:if="${dto == null}">
+        <div class="form-group">
+            <label class="form-label mt-4">회원가입</label>
+            <div class="form-floating mb-3">
+                <input type="email" name="email" class="form-control" id="floatingInput" placeholder="name@example.com">
+                <label for="floatingInput">Email address</label>
             </div>
-            <div class="form_group">
-                <input type="email" id="email" name="email" placeholder="이메일을 입력하세요.">
-                <span id="valid" th:text="${valid_email}"></span>
+            <div class="form-floating mb-3">
+                <input type="text" name="username" class="form-control" id="floatingUsername" placeholder="홍길동">
+                <label for="floatingInput">User name</label>
             </div>
-            <div class="form_group">
-                <input type="password" id="password" name="password" placeholder="비밀번호를 입력하세요.">
-                <button class="btn_register" type="submit">회원가입</button>
+            <div class="form-floating mb-4">
+                <input type="password" name="password" class="form-control" id="floatingPassword" placeholder="Password">
+                <label for="floatingPassword">Password</label>
             </div>
-        </form>
-        <form method="post" th:if="${dto}">
-            <div class="form_group" >
-                <label for="username">이름</label>
-                <input type="text" id="username" name="username" placeholder="이름을 입력하세요." th:value="${dto.username}">
-                <span id="valid" th:text="${valid_username}"></span>
+        </div>
+        <button type="submit" class="btn btn-primary">Submit</button>
+    </form>
+    <form method="post" th:unless="${dto == null}">
+        <div class="form-group">
+            <label class="form-label mt-4">회원가입</label>
+            <th:block th:if="${valid_email == null}">
+                <div class="form-floating mb-3">
+                    <input type="email" name="email" class="form-control" id="floatingInput" placeholder="name@example.com">
+                    <label for="floatingInput">Email address</label>
+                </div>
+            </th:block>
+            <th:block th:unless="${valid_email} == null">
+                <div class="form-floating mb-3 has-danger">
+                    <input type="email" name="email" class="form-control is-invalid" id="floatingInput" placeholder="name@example.com">
+                    <label for="floatingInput">Email address</label>
+                    <div class="invalid-feedback" th:text="${valid_email}"></div>
+                </div>
+            </th:block>
+            <th:block th:if="${valid_username == null}">
+                <div class="form-floating mb-3">
+                    <input type="text" name="username" class="form-control" id="floatingUsername" placeholder="홍길동">
+                    <label for="floatingInput">User name</label>
+                </div>
+            </th:block>
+            <th:block th:unless="${valid_username == null}">
+                <div class="form-floating mb-3 has-danger">
+                    <input type="text" name="username" class="form-control is-invalid" id="floatingUsername" placeholder="홍길동">
+                    <label for="floatingInput">User name</label>
+                    <div class="invalid-feedback" th:text="${valid_username}"></div>
+                </div>
+            </th:block>
+            <div class="form-floating mb-4">
+                <input type="password" name="password" class="form-control" id="floatingPassword" placeholder="Password">
+                <label for="floatingPassword">Password</label>
             </div>
-            <div class="form_group">
-                <label for="email">이메일</label>
-                <input type="eamil" id="email" name="email" placeholder="이메일을 입력하세요." th:value="${dto.email}">
-                <span id="valid" th:text="${valid_email}"></span>
-            </div>
-            <div class="form_group">
-                <label for="password">비밀번호</label>
-                <input type="password" id="password" name="password" placeholder="비밀번호를 입력하세요.">
-                <button class="btn_register" type="submit">회원가입</button>
-            </div>
-        </form>
-    </section>
+        </div>
+        <button type="submit" class="btn btn-primary">Submit</button>
+    </form>
 </div>
-<script th:inline="javascript">
-    /*<![CDATA[*/
-    const errorMsg = [[${errorMsg}]];
-    /*]]>*/
-
-    if (errorMsg != null) {
-        alert(errorMsg);
-        console.log(errorMsg);
-    }
-</script>
 </body>
 </html>

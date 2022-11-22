@@ -1,6 +1,6 @@
 package com.practice.board.validator;
 
-import com.practice.board.dto.MemberSaveRequestDTO;
+import com.practice.board.dto.member.MemberSaveRequestDTO;
 import com.practice.board.repository.MemberRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;

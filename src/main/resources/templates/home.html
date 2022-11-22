@@ -8,18 +8,7 @@
 </head>
 <body>
 <div class="container" layout:fragment="content">
-    <div sec:authorize="hasRole('USER')">
-        <h2 sec:authentication="name">사용자</h2>
-        <a href="/member/list">회원목록</a>
-        <a href="/member/info">회원정보</a>
-        <a href="/logout">로그아웃</a>
-    </div>
-    <div sec:authorize="anonymous">
-        <div th:if="${param.logout}">
-            로그아웃 하셨습니다.
-        </div>
-        <a href="/login">로그인</a>
-    </div>
+
 </div>
 </body>
 </html>

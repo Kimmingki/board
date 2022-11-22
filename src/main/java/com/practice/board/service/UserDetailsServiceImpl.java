@@ -1,4 +1,4 @@
-package com.practice.board.service.Impl;
+package com.practice.board.service;
 
 import com.practice.board.domain.Member;
 import com.practice.board.repository.MemberRepository;

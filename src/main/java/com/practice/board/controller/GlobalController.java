@@ -1,6 +1,6 @@
 package com.practice.board.controller;
 
-import com.practice.board.dto.MemberSaveRequestDTO;
+import com.practice.board.dto.member.MemberSaveRequestDTO;
 import com.practice.board.service.GlobalService;
 import com.practice.board.validator.CheckEmailValidator;
 import lombok.RequiredArgsConstructor;

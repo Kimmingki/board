@@ -1,7 +1,7 @@
-package com.practice.board.service;
+package com.practice.board.service.member;
 
 
-import com.practice.board.dto.MemberResponseDTO;
+import com.practice.board.dto.member.MemberResponseDTO;
 
 import java.util.List;
 

@@ -1,6 +1,51 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <header th:fragment="headerFragment">
-    여기가 헤더 영역~
+    <nav class="navbar navbar-expand-lg navbar-dark bg-primary mb-4">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="/">Home</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarColor01" aria-controls="navbarColor01" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarColor01">
+                <ul class="navbar-nav me-auto">
+                    <th:block sec:authorize="anonymous">
+                        <li class="nav-item">
+                            <a class="nav-link" href="/login">로그인</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="/signup">회원가입</a>
+                        </li>
+                    </th:block>
+                    <th:block sec:authorize="hasRole('USER')">
+                        <li class="nav-item">
+                            <a class="nav-link" href="/member/list">회원목록</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="/member/info">프로필</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="/logout">로그아웃</a>
+                        </li>
+                    </th:block>
+
+<!--                    <li class="nav-item dropdown">-->
+<!--                        <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Dropdown</a>-->
+<!--                        <div class="dropdown-menu">-->
+<!--                            <a class="dropdown-item" href="#">Action</a>-->
+<!--                            <a class="dropdown-item" href="#">Another action</a>-->
+<!--                            <a class="dropdown-item" href="#">Something else here</a>-->
+<!--                            <div class="dropdown-divider"></div>-->
+<!--                            <a class="dropdown-item" href="#">Separated link</a>-->
+<!--                        </div>-->
+<!--                    </li>-->
+                </ul>
+                <form class="d-flex">
+                    <input class="form-control me-sm-2" type="text" placeholder="Search">
+                    <button class="btn btn-secondary my-2 my-sm-0" type="submit">Search</button>
+                </form>
+            </div>
+        </div>
+    </nav>
 </header>
 </html>

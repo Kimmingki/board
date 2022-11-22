@@ -1,8 +1,8 @@
-package com.practice.board.service.Impl;
+package com.practice.board.service;
 
 import com.practice.board.domain.Member;
 import com.practice.board.domain.Role;
-import com.practice.board.dto.MemberSaveRequestDTO;
+import com.practice.board.dto.member.MemberSaveRequestDTO;
 import com.practice.board.repository.MemberRepository;
 import com.practice.board.service.GlobalService;
 import lombok.RequiredArgsConstructor;
