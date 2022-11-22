@@ -27,10 +27,10 @@ https://magicmk.tistory.com/category/Java/spring%20%EA%B2%8C%EC%8B%9C%ED%8C%90
      - spring security login 활용 (완료)
      - Session 정보 확인 및 활용 (진행중)
    - 회원 정보
-     - 정보 조회 (진행중)
+     - 정보 조회 (완료)
      - 정보 수정
  - 게시물
    - 게시물 조회
-   - 게시물 작성 (진행중)
+   - 게시물 작성
    - 게시물 정보
    

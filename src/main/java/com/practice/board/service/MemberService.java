@@ -12,4 +12,10 @@ public interface MemberService {
      * @return 회원 정보 목록
      */
     List<MemberResponseDTO> findMembers();
+
+    /**
+     * 회원 정보 조회
+     * @return 회원 정보
+     */
+    MemberResponseDTO findMember(String email);
 }

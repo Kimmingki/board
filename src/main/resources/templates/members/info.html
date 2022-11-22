@@ -1,25 +1,16 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org"
-      xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
       layout:decorate="~{layout/default}">
 <head>
-    <title>회원 정보</title>
+    <title th:text="|${member.getUsername()}의 정보|"></title>
 </head>
 <body>
 <div class="container" layout:fragment="content">
-<!--    <div class="form_group">-->
-<!--        <label for="email">Email: </label>-->
-<!--        <input type="text" th:value="${sec:authentication='name'}" id="email">-->
-<!--    </div>-->
-<!--    <div class="form_group">-->
-<!--        <label for="username">username: </label>-->
-<!--        <input type="text" th:value="${principal.getUsername()}" id="username">-->
-<!--    </div>-->
-<!--    <div class="form_group">-->
-<!--        <label for="password">Email: </label>-->
-<!--        <input type="password" id="password" th:value="${principal.getPassword()}">-->
-<!--    </div>-->
+    <a href="/">홈으로</a>
+    <div th:text="|Hello ${member.getUsername()}!|"></div>
+    <div th:text="${member.getEmail()}"></div>
+    <a th:href="@{/member/update}">정보 수정</a>
 </div>
 </body>
 </html>

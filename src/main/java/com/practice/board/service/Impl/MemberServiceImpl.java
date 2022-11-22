@@ -5,6 +5,7 @@ import com.practice.board.dto.MemberResponseDTO;
 import com.practice.board.repository.MemberRepository;
 import com.practice.board.service.MemberService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -29,5 +30,16 @@ public class MemberServiceImpl implements MemberService {
         }
 
         return members;
+    }
+
+    @Override
+    public MemberResponseDTO findMember(String email) {
+        Member member = memberRepository.findByEmail(email).orElseThrow(() -> new UsernameNotFoundException("이메일이 존재하지 않습니다."));
+
+        MemberResponseDTO result = MemberResponseDTO.builder()
+                .member(member)
+                .build();
+
+        return result;
     }
 }
