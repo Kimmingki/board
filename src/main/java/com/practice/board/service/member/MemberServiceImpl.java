@@ -1,6 +1,7 @@
 package com.practice.board.service.member;
 
 import com.practice.board.domain.Member;
+import com.practice.board.dto.member.MemberPasswordUpdateDTO;
 import com.practice.board.dto.member.MemberResponseDTO;
 import com.practice.board.dto.member.MemberUsernameUpdateDTO;
 import com.practice.board.repository.MemberRepository;
@@ -53,5 +54,13 @@ public class MemberServiceImpl implements MemberService {
         memberRepository.save(member);
 
         return member.getId();
+    }
+
+    @Override
+    public Long updateMemberPassword(MemberPasswordUpdateDTO memberPasswordUpdateDTO, String email) {
+        Member member = memberRepository.findByEmail(email).orElseThrow(() -> new UsernameNotFoundException("이메일이 존재하지 않습니다."));
+
+
+        return null;
     }
 }

@@ -1,5 +1,6 @@
 package com.practice.board.controller;
 
+import com.practice.board.dto.member.MemberPasswordUpdateDTO;
 import com.practice.board.dto.member.MemberResponseDTO;
 import com.practice.board.dto.member.MemberUsernameUpdateDTO;
 import com.practice.board.service.GlobalService;
@@ -13,6 +14,7 @@ import org.springframework.ui.Model;
 import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import javax.validation.Valid;
@@ -50,9 +52,7 @@ public class MemberController {
     @GetMapping("/info")
     public String memberInfo(Model model, Authentication authentication) {
         UserDetails userDetails = (UserDetails) authentication.getPrincipal();
-
         MemberResponseDTO member = memberService.findMember(userDetails.getUsername());
-
         model.addAttribute("member", member);
 
         return "/members/info";
@@ -71,9 +71,7 @@ public class MemberController {
         }
 
         UserDetails userDetails = (UserDetails) authentication.getPrincipal();
-
         MemberResponseDTO member = memberService.findMember(userDetails.getUsername());
-
         model.addAttribute("member", member);
 
         return "/members/updateUsername";
@@ -94,9 +92,7 @@ public class MemberController {
 
         if (errors.hasErrors()) {
             model.addAttribute("member", memberUsernameUpdateDTO);
-
             globalService.messageHandling(errors, model);
-
             return "/members/updateUsername";
         }
 
@@ -112,11 +108,29 @@ public class MemberController {
      * @return 회원 비밀번호 변경 페이지
      */
     @GetMapping("/update/password")
-    public String updatePassword(Model model, Authentication authentication) {
+    public String updatePasswordForm(Model model, Authentication authentication) {
         if (authentication == null) {
             return "/home";
         }
 
         return "/members/updatePassword";
     }
+
+    @PostMapping("/update/password")
+    public String updatePassword(@Valid MemberPasswordUpdateDTO memberPasswordUpdateDTO, Errors errors, Model model, Authentication authentication) {
+        if (authentication == null) {
+            return "/home";
+        }
+
+        if (errors.hasErrors()) {
+            globalService.messageHandling(errors, model);
+            return "/members/updatePassword";
+        }
+
+        UserDetails userDetails = (UserDetails) authentication.getPrincipal();
+        memberService.updateMemberPassword(memberPasswordUpdateDTO, userDetails.getUsername());
+
+        return null;
+    }
+
 }

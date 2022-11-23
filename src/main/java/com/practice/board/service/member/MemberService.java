@@ -1,6 +1,7 @@
 package com.practice.board.service.member;
 
 
+import com.practice.board.dto.member.MemberPasswordUpdateDTO;
 import com.practice.board.dto.member.MemberResponseDTO;
 import com.practice.board.dto.member.MemberUsernameUpdateDTO;
 
@@ -26,4 +27,11 @@ public interface MemberService {
      * @return 회원 ID
      */
     Long updateMemberUsername(MemberUsernameUpdateDTO memberUsernameUpdateDTO);
+
+    /**
+     * 회원 비밀번호 변경
+     * @param memberPasswordUpdateDTO
+     * @return
+     */
+    Long updateMemberPassword(MemberPasswordUpdateDTO memberPasswordUpdateDTO, String email);
 }
