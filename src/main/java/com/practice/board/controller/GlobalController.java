@@ -24,17 +24,10 @@ public class GlobalController {
     private final GlobalService globalService;
     private final CheckEmailValidator checkEmailValidator;
 
-    /* 유효성 검증 */
+    /* 중복 검사 */
     @InitBinder
     public void validatorBinder(WebDataBinder binder) {
         binder.addValidators(checkEmailValidator);
-    }
-
-    public void messageHandling(Errors errors, Model model) {
-        Map<String, String> validatorResult = globalService.validateHandling(errors);
-        for (String key : validatorResult.keySet()) {
-            model.addAttribute(key, validatorResult.get(key));
-        }
     }
 
     /**
@@ -79,7 +72,7 @@ public class GlobalController {
             /* 회원가입 실패 시 입력 데이터 유지 */
             model.addAttribute("dto", memberSaveRequestDTO);
             /* 유효성 검사를 통과하지 못한 필드와 메세지 핸들링 */
-            messageHandling(errors, model);
+            globalService.messageHandling(errors, model);
             /* 회원가입 페이지로 리턴 */
             return "/members/memberForm";
         }

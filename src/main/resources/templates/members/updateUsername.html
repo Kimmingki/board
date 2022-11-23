@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout/default}">
+<head>
+    <title>회원 정보 수정</title>
+</head>
+<body>
+<div class="container" layout:fragment="content">
+    <form method="post">
+        <div class="form-group">
+            <label class="form-label mt-4">회원 정보 수정</label>
+            <button type="button" class="btn btn-outline-primary btn-sm" onclick="location='/member/update/password'">비밀번호 변경</button>
+            <div class="form-floating mb-3">
+                <input type="email" name="email" class="form-control" id="floatingInput" th:value="${member.getEmail()}" readonly>
+                <label for="floatingInput">Email address</label>
+            </div>
+            <th:block th:if="${valid_username == null}">
+                <div class="form-floating mb-3">
+                    <input type="text" name="username" class="form-control" id="floatingUsername" th:value="${member.getUsername()}">
+                    <label for="floatingUsername">User name</label>
+                </div>
+            </th:block>
+            <th:block th:unless="${valid_username == null}">
+                <div class="form-floating mb-3 has-danger">
+                    <input type="text" name="username" class="form-control is-invalid" id="floatingUsername">
+                    <label for="floatingInput">User name</label>
+                    <div class="invalid-feedback" th:text="${valid_username}"></div>
+                </div>
+            </th:block>
+        </div>
+        <button type="submit" class="btn btn-primary">update</button>
+    </form>
+</div>
+</body>
+</html>

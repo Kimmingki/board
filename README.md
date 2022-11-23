@@ -3,6 +3,7 @@
 ---
 ### 프로젝트 설정
  - gradle
+ - h2 DB 1.4.200
  - spring boot 2.7.5
  - java 11
 ---

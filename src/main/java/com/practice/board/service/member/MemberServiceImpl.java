@@ -2,8 +2,10 @@ package com.practice.board.service.member;
 
 import com.practice.board.domain.Member;
 import com.practice.board.dto.member.MemberResponseDTO;
+import com.practice.board.dto.member.MemberUsernameUpdateDTO;
 import com.practice.board.repository.MemberRepository;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
@@ -12,6 +14,7 @@ import java.util.List;
 
 @Service
 @RequiredArgsConstructor
+@Slf4j
 public class MemberServiceImpl implements MemberService {
 
     private final MemberRepository memberRepository;
@@ -40,5 +43,15 @@ public class MemberServiceImpl implements MemberService {
                 .build();
 
         return result;
+    }
+
+    @Override
+    public Long updateMemberUsername(MemberUsernameUpdateDTO memberUsernameUpdateDTO) {
+        Member member = memberRepository.findByEmail(memberUsernameUpdateDTO.getEmail()).orElseThrow(() -> new UsernameNotFoundException("이메일이 존재하지 않습니다."));
+
+        member.updateUsername(memberUsernameUpdateDTO.getUsername());
+        memberRepository.save(member);
+
+        return member.getId();
     }
 }

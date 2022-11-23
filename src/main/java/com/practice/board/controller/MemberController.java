@@ -1,6 +1,8 @@
 package com.practice.board.controller;
 
 import com.practice.board.dto.member.MemberResponseDTO;
+import com.practice.board.dto.member.MemberUsernameUpdateDTO;
+import com.practice.board.service.GlobalService;
 import com.practice.board.service.member.MemberService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -8,9 +10,12 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import javax.validation.Valid;
 import java.util.List;
 
 @Controller
@@ -19,6 +24,7 @@ import java.util.List;
 @RequestMapping("/member")
 public class MemberController {
 
+    private final GlobalService globalService;
     private final MemberService memberService;
 
     /**
@@ -53,19 +59,64 @@ public class MemberController {
     }
 
     /**
-     * 회원 정보 수정
+     * 회원 이름 변경
      * @param model
      * @param authentication 인증 정보
-     * @return 회원 정보 수정 페이지
+     * @return 회원 이름 변경 페이지
      */
-    @GetMapping("/update")
-    public String updateForm(Model model, Authentication authentication) {
+    @GetMapping("/update/username")
+    public String updateUsernameForm(Model model, Authentication authentication) {
+        if (authentication == null) {
+            return "/home";
+        }
+
         UserDetails userDetails = (UserDetails) authentication.getPrincipal();
 
         MemberResponseDTO member = memberService.findMember(userDetails.getUsername());
 
         model.addAttribute("member", member);
 
-        return "/members/update";
+        return "/members/updateUsername";
+    }
+
+    /**
+     * 회원 이름 변경 post
+     * @param memberUsernameUpdateDTO
+     * @param errors
+     * @param model
+     * @return 회원 정보 페이지
+     */
+    @PostMapping("/update/username")
+    public String updateUsername(@Valid MemberUsernameUpdateDTO memberUsernameUpdateDTO, Errors errors, Model model, Authentication authentication) {
+        if (authentication == null) {
+            return "/home";
+        }
+
+        if (errors.hasErrors()) {
+            model.addAttribute("member", memberUsernameUpdateDTO);
+
+            globalService.messageHandling(errors, model);
+
+            return "/members/updateUsername";
+        }
+
+        memberService.updateMemberUsername(memberUsernameUpdateDTO);
+
+        return "redirect:/member/info";
+    }
+
+    /**
+     * 회원 비밀번호 변경
+     * @param model
+     * @param authentication 인증 정보
+     * @return 회원 비밀번호 변경 페이지
+     */
+    @GetMapping("/update/password")
+    public String updatePassword(Model model, Authentication authentication) {
+        if (authentication == null) {
+            return "/home";
+        }
+
+        return "/members/updatePassword";
     }
 }

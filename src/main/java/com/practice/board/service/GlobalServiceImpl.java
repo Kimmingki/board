@@ -4,11 +4,11 @@ import com.practice.board.domain.Member;
 import com.practice.board.domain.Role;
 import com.practice.board.dto.member.MemberSaveRequestDTO;
 import com.practice.board.repository.MemberRepository;
-import com.practice.board.service.GlobalService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.ui.Model;
 import org.springframework.validation.Errors;
 import org.springframework.validation.FieldError;
 
@@ -22,7 +22,6 @@ public class GlobalServiceImpl implements GlobalService {
     private final MemberRepository memberRepository;
     private final PasswordEncoder passwordEncoder;
 
-    /* 유효성 및 중복 검사 */
     @Transactional(readOnly = true)
     @Override
     public Map<String, String> validateHandling(Errors errors) {
@@ -35,6 +34,14 @@ public class GlobalServiceImpl implements GlobalService {
         }
 
         return validatorResult;
+    }
+
+    @Override
+    public void messageHandling(Errors errors, Model model) {
+        Map<String, String> validatorResult = validateHandling(errors);
+        for (String key : validatorResult.keySet()) {
+            model.addAttribute(key, validatorResult.get(key));
+        }
     }
 
     @Override

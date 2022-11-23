@@ -28,4 +28,12 @@ public class Member {
     @Column
     @Enumerated(EnumType.STRING)
     private Role role;
+
+    public void updateUsername(String username) {
+        this.username = username;
+    }
+
+    public void updatePassword(String password) {
+        this.password = password;
+    }
 }
