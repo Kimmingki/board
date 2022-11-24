@@ -29,8 +29,8 @@ https://magicmk.tistory.com/category/Java/spring%20%EA%B2%8C%EC%8B%9C%ED%8C%90
    - 로그인 / 로그아웃
      - spring security login (완료)
    - 회원 정보
-     - 정보 수정 (진행중)
-     - 회원 탈퇴
+     - 정보 수정 (username 완료, password 완료)
+     - 회원 탈퇴 (완료)
  - 게시물
    - 게시물 조회
    - 게시물 작성

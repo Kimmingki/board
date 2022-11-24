@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout/default}">
+<head>
+    <title>회원 탈퇴</title>
+</head>
+<body>
+<div class="container" layout:fragment="content">
+    <form method="post">
+        <label class="form-label mt-4">회원 탈퇴</label>
+        <div class="form-floating mb-3" th:if="${wrongPassword == null}">
+            <input type="password" name="password" class="form-control" id="password" required>
+            <label for="password">비밀번호</label>
+        </div>
+        <div class="form-floating mb-3 has-danger" th:unless="${wrongPassword == null}">
+            <input type="password" name="password" class="form-control is-invalid" id="password" required>
+            <label for="password">비밀번호</label>
+            <div class="invalid-feedback" th:text="${wrongPassword}"></div>
+        </div>
+        <button type="submit" class="btn btn-primary">회원 탈퇴</button>
+    </form>
+</div>
+</body>
+</html>

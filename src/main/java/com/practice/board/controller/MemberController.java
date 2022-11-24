@@ -12,10 +12,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.Errors;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 import java.util.List;
@@ -46,6 +43,7 @@ public class MemberController {
 
     /**
      * 회원 정보 조회
+     *
      * @param model
      * @param authentication 인증 정보
      * @return 회원 정보 페이지
@@ -61,6 +59,7 @@ public class MemberController {
 
     /**
      * 회원 이름 변경
+     *
      * @param model
      * @param authentication 인증 정보
      * @return 회원 이름 변경 페이지
@@ -76,6 +75,7 @@ public class MemberController {
 
     /**
      * 회원 이름 변경 post
+     *
      * @param memberUsernameUpdateDTO
      * @param errors
      * @param model
@@ -96,6 +96,7 @@ public class MemberController {
 
     /**
      * 회원 비밀번호 변경
+     *
      * @param model
      * @param authentication 인증 정보
      * @return 회원 비밀번호 변경 페이지
@@ -105,10 +106,18 @@ public class MemberController {
         return "/members/updatePassword";
     }
 
+    /**
+     * 회원 비밀번호 변경 post
+     *
+     * @param memberPasswordUpdateDTO
+     * @param model
+     * @param authentication
+     * @return 회원 정보 페이지
+     */
     @PostMapping("/update/password")
     public String updatePassword(@Valid MemberPasswordUpdateDTO memberPasswordUpdateDTO, Model model, Authentication authentication) {
         // new password 비교
-        if(!Objects.equals(memberPasswordUpdateDTO.getNewPassword(), memberPasswordUpdateDTO.getConfirmPassword())) {
+        if (!Objects.equals(memberPasswordUpdateDTO.getNewPassword(), memberPasswordUpdateDTO.getConfirmPassword())) {
             model.addAttribute("dto", memberPasswordUpdateDTO);
             model.addAttribute("differentPassword", "비밀번호가 같지 않습니다.");
             return "/members/updatePassword";
@@ -127,4 +136,33 @@ public class MemberController {
         return "redirect:/member/info";
     }
 
+    /**
+     * 회원 탈퇴
+     *
+     * @return
+     */
+    @GetMapping("/withdrawal")
+    public String memberWithdrawalForm() {
+        return "/members/withdrawal";
+    }
+
+    /**
+     * 회원 탈퇴 post
+     * @param password
+     * @param model
+     * @param authentication
+     * @return 홈 페이지
+     */
+    @PostMapping("/withdrawal")
+    public String memberWithdrawal(@RequestParam String password, Model model, Authentication authentication) {
+        UserDetails userDetails = (UserDetails) authentication.getPrincipal();
+        boolean result = memberService.withdrawal(userDetails.getUsername(), password);
+
+        if (result) {
+            return "redirect:/logout";
+        } else {
+            model.addAttribute("wrongPassword", "비밀번호가 맞지 않습니다.");
+            return "/members/withdrawal";
+        }
+    }
 }

@@ -73,4 +73,16 @@ public class MemberServiceImpl implements MemberService {
 
         return member.getId();
     }
+
+    @Override
+    public boolean withdrawal(String email, String password) {
+        Member member = memberRepository.findByEmail(email).orElseThrow(() -> new UsernameNotFoundException("이메일이 존재하지 않습니다."));
+
+        if (passwordEncoder.matches(password, member.getPassword())) {
+            memberRepository.delete(member);
+            return true;
+        } else {
+            return false;
+        }
+    }
 }

@@ -34,4 +34,6 @@ public interface MemberService {
      * @return
      */
     Long updateMemberPassword(MemberPasswordUpdateDTO memberPasswordUpdateDTO, String email);
+
+    boolean withdrawal(String email, String password);
 }
