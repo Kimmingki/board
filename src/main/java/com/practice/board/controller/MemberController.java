@@ -19,6 +19,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import javax.validation.Valid;
 import java.util.List;
+import java.util.Objects;
 
 @Controller
 @RequiredArgsConstructor
@@ -66,10 +67,6 @@ public class MemberController {
      */
     @GetMapping("/update/username")
     public String updateUsernameForm(Model model, Authentication authentication) {
-        if (authentication == null) {
-            return "/home";
-        }
-
         UserDetails userDetails = (UserDetails) authentication.getPrincipal();
         MemberResponseDTO member = memberService.findMember(userDetails.getUsername());
         model.addAttribute("member", member);
@@ -86,10 +83,6 @@ public class MemberController {
      */
     @PostMapping("/update/username")
     public String updateUsername(@Valid MemberUsernameUpdateDTO memberUsernameUpdateDTO, Errors errors, Model model, Authentication authentication) {
-        if (authentication == null) {
-            return "/home";
-        }
-
         if (errors.hasErrors()) {
             model.addAttribute("member", memberUsernameUpdateDTO);
             globalService.messageHandling(errors, model);
@@ -109,28 +102,29 @@ public class MemberController {
      */
     @GetMapping("/update/password")
     public String updatePasswordForm(Model model, Authentication authentication) {
-        if (authentication == null) {
-            return "/home";
-        }
-
         return "/members/updatePassword";
     }
 
     @PostMapping("/update/password")
-    public String updatePassword(@Valid MemberPasswordUpdateDTO memberPasswordUpdateDTO, Errors errors, Model model, Authentication authentication) {
-        if (authentication == null) {
-            return "/home";
-        }
-
-        if (errors.hasErrors()) {
-            globalService.messageHandling(errors, model);
+    public String updatePassword(@Valid MemberPasswordUpdateDTO memberPasswordUpdateDTO, Model model, Authentication authentication) {
+        // new password 비교
+        if(!Objects.equals(memberPasswordUpdateDTO.getNewPassword(), memberPasswordUpdateDTO.getConfirmPassword())) {
+            model.addAttribute("dto", memberPasswordUpdateDTO);
+            model.addAttribute("differentPassword", "비밀번호가 같지 않습니다.");
             return "/members/updatePassword";
         }
 
         UserDetails userDetails = (UserDetails) authentication.getPrincipal();
-        memberService.updateMemberPassword(memberPasswordUpdateDTO, userDetails.getUsername());
+        Long result = memberService.updateMemberPassword(memberPasswordUpdateDTO, userDetails.getUsername());
 
-        return null;
+        // 현재 비밀번호가 틀렸을 경우
+        if (result == null) {
+            model.addAttribute("dto", memberPasswordUpdateDTO);
+            model.addAttribute("wrongPassword", "비밀번호가 맞지 않습니다.");
+            return "/members/updatePassword";
+        }
+
+        return "redirect:/member/info";
     }
 
 }

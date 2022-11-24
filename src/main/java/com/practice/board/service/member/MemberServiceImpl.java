@@ -8,10 +8,12 @@ import com.practice.board.repository.MemberRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 @Service
 @RequiredArgsConstructor
@@ -19,6 +21,7 @@ import java.util.List;
 public class MemberServiceImpl implements MemberService {
 
     private final MemberRepository memberRepository;
+    private final PasswordEncoder passwordEncoder;
 
     @Override
     public List<MemberResponseDTO> findMembers() {
@@ -60,7 +63,14 @@ public class MemberServiceImpl implements MemberService {
     public Long updateMemberPassword(MemberPasswordUpdateDTO memberPasswordUpdateDTO, String email) {
         Member member = memberRepository.findByEmail(email).orElseThrow(() -> new UsernameNotFoundException("이메일이 존재하지 않습니다."));
 
+        if (!passwordEncoder.matches(memberPasswordUpdateDTO.getCurrentPassword(), member.getPassword())) {
+            return null;
+        } else {
+            memberPasswordUpdateDTO.setNewPassword(passwordEncoder.encode(memberPasswordUpdateDTO.getNewPassword()));
+            member.updatePassword(memberPasswordUpdateDTO.getNewPassword());
+            memberRepository.save(member);
+        }
 
-        return null;
+        return member.getId();
     }
 }
