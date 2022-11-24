@@ -32,8 +32,7 @@ public class GlobalController {
 
     /**
      * Home 화면
-     *
-     * @return 홈페이지
+     * @return 홈 페이지
      */
     @GetMapping("/")
     public String Home() {
@@ -42,7 +41,7 @@ public class GlobalController {
 
     /**
      * 예외처리 페이지
-     * @return
+     * @return 예외처리 페이지
      */
     @GetMapping("/denied")
     public String doDenied() {
@@ -51,7 +50,6 @@ public class GlobalController {
 
     /**
      * 회원 가입
-     *
      * @return 회원 가입 페이지
      */
     @GetMapping("/signup")
@@ -61,9 +59,10 @@ public class GlobalController {
 
     /**
      * 회원 가입 post
-     *
-     * @param memberSaveRequestDTO 회원 정보
-     * @return 홈페이지
+     * @param memberSaveRequestDTO
+     * @param errors
+     * @param model
+     * @return 홈 페이지
      */
     @PostMapping("/signup")
     public String signup(@Valid MemberSaveRequestDTO memberSaveRequestDTO, Errors errors, Model model) {
@@ -83,7 +82,7 @@ public class GlobalController {
 
     /**
      * 로그인 페이지
-     * @return
+     * @return 로그인 페이지
      */
     @GetMapping("/login")
     public String loginForm() {

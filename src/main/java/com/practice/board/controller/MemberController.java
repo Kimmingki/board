@@ -29,7 +29,6 @@ public class MemberController {
 
     /**
      * 회원 목록 조회
-     *
      * @param model
      * @return 회원 목록 페이지
      */
@@ -43,7 +42,6 @@ public class MemberController {
 
     /**
      * 회원 정보 조회
-     *
      * @param model
      * @param authentication 인증 정보
      * @return 회원 정보 페이지
@@ -59,7 +57,6 @@ public class MemberController {
 
     /**
      * 회원 이름 변경
-     *
      * @param model
      * @param authentication 인증 정보
      * @return 회원 이름 변경 페이지
@@ -75,7 +72,6 @@ public class MemberController {
 
     /**
      * 회원 이름 변경 post
-     *
      * @param memberUsernameUpdateDTO
      * @param errors
      * @param model
@@ -96,19 +92,15 @@ public class MemberController {
 
     /**
      * 회원 비밀번호 변경
-     *
-     * @param model
-     * @param authentication 인증 정보
      * @return 회원 비밀번호 변경 페이지
      */
     @GetMapping("/update/password")
-    public String updatePasswordForm(Model model, Authentication authentication) {
+    public String updatePasswordForm() {
         return "/members/updatePassword";
     }
 
     /**
      * 회원 비밀번호 변경 post
-     *
      * @param memberPasswordUpdateDTO
      * @param model
      * @param authentication
@@ -138,8 +130,7 @@ public class MemberController {
 
     /**
      * 회원 탈퇴
-     *
-     * @return
+     * @return 회원 탈퇴 페이지
      */
     @GetMapping("/withdrawal")
     public String memberWithdrawalForm() {
