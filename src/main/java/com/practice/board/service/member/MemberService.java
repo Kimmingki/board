@@ -31,9 +31,15 @@ public interface MemberService {
     /**
      * 회원 비밀번호 변경
      * @param memberPasswordUpdateDTO
-     * @return
+     * @return 회원 ID
      */
     Long updateMemberPassword(MemberPasswordUpdateDTO memberPasswordUpdateDTO, String email);
 
+    /**
+     * 회원 탈퇴
+     * @param email
+     * @param password
+     * @return boolean
+     */
     boolean withdrawal(String email, String password);
 }
