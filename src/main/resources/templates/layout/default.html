@@ -4,7 +4,7 @@
 <head>
     <th:block th:insert="layout/fragments/head :: headFragment"></th:block>
 </head>
-<body>
+<body class="d-flex flex-column min-vh-100">
     <header th:replace="layout/fragments/header :: headerFragment"></header>
     <div layout:fragment="content"></div>
     <footer th:replace="layout/fragments/footer :: footerFragment"></footer>

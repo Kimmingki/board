@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout/default}">
+<head>
+    <title>[[${dto.getTitle()}]]</title>
+</head>
+<body>
+<div class="container" layout:fragment="content">
+    <h1 class="mt-4">Board</h1>
+    <div class="card mb-4">
+        <div class="card-body">
+            <from>
+                <div class="mb-3">
+                    <label for="title" class="form-label">title</label>
+                    <input type="text" class="form-control" id="title" name="title" th:value="${dto.title}" disabled>
+                </div>
+                <div class="mb-3">
+                    <label for="content" class="form-label">content</label>
+                    <textarea class="form-control" id="content" name="content" disabled>[[${dto.content}]]</textarea>
+                </div>
+                <div class="mb-3">
+                    <label for="createdAt" class="form-label">작성일</label> <input
+                        type="text" class="form-control" id="createdAt" name="createdAt"
+                        th:value="${#temporals.format(dto.createdAt, 'yyyy-MM-dd HH:mm')}" disabled>
+                </div>
+                <div class="mb-3">
+                    <label for="writer" class="form-label">작성자</label> <input
+                        type="text" class="form-control" id="writer" name="writer"
+                        th:value="${dto.username}" disabled>
+                </div>
+                <a href="#" class="btn btn-outline-secondary">list</a>
+
+                <a href="#" class="btn btn-outline-warning">modify</a>
+                <a href="#" class="btn btn-outline-danger" onclick="return confirm('삭제하시겠습니까?')">remove</a>
+            </from>
+        </div>
+    </div>
+</div>
+</body>
+</html>

@@ -2,6 +2,7 @@ package com.practice.board.service.board;
 
 import com.practice.board.domain.Board;
 import com.practice.board.domain.Member;
+import com.practice.board.dto.board.BoardResponseDTO;
 import com.practice.board.dto.board.BoardWriteRequestDTO;
 import com.practice.board.repository.BoardRepository;
 import com.practice.board.repository.MemberRepository;
@@ -27,5 +28,15 @@ public class BoardServiceImpl implements BoardService{
         boardRepository.save(result);
 
         return result.getId();
+    }
+
+    @Override
+    public BoardResponseDTO boardDetail(Long id) {
+        Board board = boardRepository.findById(id).orElseThrow(() -> new IllegalArgumentException("존재하지 않는 게시글입니다."));
+        BoardResponseDTO result = BoardResponseDTO.builder()
+                .board(board)
+                .build();
+
+        return result;
     }
 }
