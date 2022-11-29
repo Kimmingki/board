@@ -15,6 +15,7 @@ public class BoardResponseDTO {
     private String content;
     private LocalDateTime createdAt;
     private String username;
+    private String email;
 
     @Builder
     public BoardResponseDTO(Board board) {
@@ -22,5 +23,6 @@ public class BoardResponseDTO {
         this.content = board.getContent();
         this.createdAt = board.getCreatedAt();
         this.username = board.getMember().getUsername();
+        this.email = board.getMember().getEmail();
     }
 }

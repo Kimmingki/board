@@ -40,6 +40,12 @@ public class BoardController {
         return "/home";
     }
 
+    /**
+     * 게시글 상세 조회
+     * @param id 게시글 ID
+     * @param model
+     * @return
+     */
     @GetMapping("/{id}")
     public String boardDetail(@PathVariable Long id, Model model) {
         BoardResponseDTO result = boardService.boardDetail(id);

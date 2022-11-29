@@ -29,10 +29,11 @@
                         type="text" class="form-control" id="writer" name="writer"
                         th:value="${dto.username}" disabled>
                 </div>
-                <a href="#" class="btn btn-outline-secondary">list</a>
-
-                <a href="#" class="btn btn-outline-warning">modify</a>
-                <a href="#" class="btn btn-outline-danger" onclick="return confirm('삭제하시겠습니까?')">remove</a>
+                <a href="/" class="btn btn-outline-secondary">list</a>
+                <th:block th:if="${dto.getEmail() == #authentication.principal.username}">
+                    <a href="#" class="btn btn-outline-warning">modify</a>
+                    <a href="#" class="btn btn-outline-danger" onclick="return confirm('삭제하시겠습니까?')">remove</a>
+                </th:block>
             </from>
         </div>
     </div>
