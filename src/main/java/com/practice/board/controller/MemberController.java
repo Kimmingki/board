@@ -37,7 +37,7 @@ public class MemberController {
         List<MemberResponseDTO> members = memberService.findMembers();
         model.addAttribute("members", members);
 
-        return "/members/memberList";
+        return "/member/memberList";
     }
 
     /**
@@ -52,7 +52,7 @@ public class MemberController {
         MemberResponseDTO member = memberService.findMember(userDetails.getUsername());
         model.addAttribute("member", member);
 
-        return "/members/info";
+        return "/member/info";
     }
 
     /**
@@ -67,7 +67,7 @@ public class MemberController {
         MemberResponseDTO member = memberService.findMember(userDetails.getUsername());
         model.addAttribute("member", member);
 
-        return "/members/updateUsername";
+        return "/member/updateUsername";
     }
 
     /**
@@ -82,7 +82,7 @@ public class MemberController {
         if (errors.hasErrors()) {
             model.addAttribute("member", memberUsernameUpdateDTO);
             globalService.messageHandling(errors, model);
-            return "/members/updateUsername";
+            return "/member/updateUsername";
         }
 
         memberService.updateMemberUsername(memberUsernameUpdateDTO);
@@ -112,7 +112,7 @@ public class MemberController {
         if (!Objects.equals(memberPasswordUpdateDTO.getNewPassword(), memberPasswordUpdateDTO.getConfirmPassword())) {
             model.addAttribute("dto", memberPasswordUpdateDTO);
             model.addAttribute("differentPassword", "비밀번호가 같지 않습니다.");
-            return "/members/updatePassword";
+            return "/member/updatePassword";
         }
 
         UserDetails userDetails = (UserDetails) authentication.getPrincipal();
@@ -153,7 +153,7 @@ public class MemberController {
             return "redirect:/logout";
         } else {
             model.addAttribute("wrongPassword", "비밀번호가 맞지 않습니다.");
-            return "/members/withdrawal";
+            return "/member/withdrawal";
         }
     }
 }

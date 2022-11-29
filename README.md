@@ -32,7 +32,11 @@ https://magicmk.tistory.com/category/Java/spring%20%EA%B2%8C%EC%8B%9C%ED%8C%90
      - 정보 수정 (username 완료, password 완료)
      - 회원 탈퇴 (완료)
  - 게시물
-   - 게시물 조회 (진행중)
+   - 게시물 조회
+     - 상세 조회 (완료)
+     - 전체 조회 (진행중)
    - 게시물 작성 (완료)
+   - 게시물 수정 및 삭제 (진행중)
    - 게시물 검색
-   
+ - 댓글
+ - 이미지

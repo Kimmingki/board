@@ -39,4 +39,13 @@ public class BoardServiceImpl implements BoardService{
 
         return result;
     }
+
+    @Override
+    public Long boardUpdate(Long id, BoardWriteRequestDTO boardWriteRequestDTO) {
+        Board board = boardRepository.findById(id).orElseThrow(() -> new IllegalArgumentException("존재하지 않는 게시글입니다."));
+        board.update(boardWriteRequestDTO.getTitle(), boardWriteRequestDTO.getContent());
+        boardRepository.save(board);
+
+        return board.getId();
+    }
 }

@@ -72,7 +72,7 @@ public class GlobalController {
             /* 유효성 검사를 통과하지 못한 필드와 메세지 핸들링 */
             globalService.messageHandling(errors, model);
             /* 회원가입 페이지로 리턴 */
-            return "/members/memberForm";
+            return "/member/memberForm";
         }
         globalService.join(memberSaveRequestDTO);
 

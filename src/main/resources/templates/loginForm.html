@@ -7,7 +7,7 @@
 </head>
 <body>
 <div class="container" layout:fragment="content">
-    <form th:action="@{/login}" method="post">
+    <form method="post">
         <div class="form-group">
             <label class="form-label mt-4">로그인</label>
             <th:block th:if="${param.error == null}">

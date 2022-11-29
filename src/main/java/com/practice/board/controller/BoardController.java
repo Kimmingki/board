@@ -50,7 +50,36 @@ public class BoardController {
     public String boardDetail(@PathVariable Long id, Model model) {
         BoardResponseDTO result = boardService.boardDetail(id);
         model.addAttribute("dto", result);
+        model.addAttribute("id", id);
 
         return "board/detail";
+    }
+
+    /**
+     * 게시글 수정
+     * @param id 게시글 ID
+     * @param model
+     * @return 게시글 수정 페이지
+     */
+    @GetMapping("/{id}/update")
+    public String boardUpdateForm(@PathVariable Long id, Model model) {
+        BoardResponseDTO result = boardService.boardDetail(id);
+        model.addAttribute("dto", result);
+        model.addAttribute("id", id);
+
+        return "board/update";
+    }
+
+    /**
+     * 게시글 수정 post
+     * @param id 게시글 ID
+     * @param boardWriteRequestDTO 수정 정보
+     * @return 게시글 상세 조회 페이지
+     */
+    @PostMapping("/{id}/update")
+    public String boardUpdate(@PathVariable Long id, BoardWriteRequestDTO boardWriteRequestDTO) {
+        boardService.boardUpdate(id, boardWriteRequestDTO);
+
+        return "redirect:/board/{id}}";
     }
 }

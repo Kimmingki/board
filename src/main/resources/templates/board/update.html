@@ -3,21 +3,21 @@
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
       layout:decorate="~{layout/default}">
 <head>
-    <title>게시글 | [[${dto.getTitle()}]]</title>
+    <title>게시글 수정 | [[${dto.getTitle()}]]</title>
 </head>
 <body>
 <div class="container" layout:fragment="content">
     <h1 class="mt-4">Board</h1>
     <div class="card mb-4">
         <div class="card-body">
-            <from>
+            <from method="post">
                 <div class="mb-3">
                     <label for="title" class="form-label">title</label>
-                    <input type="text" class="form-control" id="title" name="title" th:value="${dto.title}" disabled>
+                    <input type="text" class="form-control" id="title" name="title" th:value="${dto.title}">
                 </div>
                 <div class="mb-3">
                     <label for="content" class="form-label">content</label>
-                    <textarea class="form-control" id="content" name="content" disabled>[[${dto.content}]]</textarea>
+                    <textarea class="form-control" id="content" name="content">[[${dto.content}]]</textarea>
                 </div>
                 <div class="mb-3">
                     <label for="createdAt" class="form-label">작성일</label> <input
@@ -29,11 +29,8 @@
                         type="text" class="form-control" id="writer" name="writer"
                         th:value="${dto.username}" disabled>
                 </div>
-                <a href="/" class="btn btn-outline-secondary">list</a>
-                <th:block th:if="${dto.getEmail() == #authentication.principal.username}">
-                    <a th:href="@{/board/{id}/update(id=${id})}" class="btn btn-outline-warning">modify</a>
-                    <a th:href="@{/board/{id}/remove(id=${id})}" class="btn btn-outline-danger" onclick="return confirm('삭제하시겠습니까?')">remove</a>
-                </th:block>
+                <a th:href="@{/board/{id}(id=${id})}" class="btn btn-outline-secondary">본문</a>
+                <button type="submit" class="btn btn-primary">등록</button>
             </from>
         </div>
     </div>
