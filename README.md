@@ -37,6 +37,7 @@ https://magicmk.tistory.com/category/Java/spring%20%EA%B2%8C%EC%8B%9C%ED%8C%90
      - 전체 조회 (완료)
    - 게시물 작성 (완료)
    - 게시물 수정 및 삭제 (완료)
-   - 게시물 검색
+   - 게시물 검색 (진행중)
+   - 페이징 처리 (진행중)
  - 댓글
  - 이미지

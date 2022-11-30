@@ -59,11 +59,17 @@ public class BoardController {
      * 게시글 수정
      * @param id 게시글 ID
      * @param model
+     * @param authentication 유저 정보
      * @return 게시글 수정 페이지
      */
     @GetMapping("/{id}/update")
-    public String boardUpdateForm(@PathVariable Long id, Model model) {
+    public String boardUpdateForm(@PathVariable Long id, Model model, Authentication authentication) {
+        UserDetails userDetails = (UserDetails) authentication.getPrincipal();
         BoardResponseDTO result = boardService.boardDetail(id);
+        if (result.getEmail() != userDetails.getUsername()) {
+            return "redirect:/";
+        }
+
         model.addAttribute("dto", result);
         model.addAttribute("id", id);
 
@@ -86,10 +92,17 @@ public class BoardController {
     /**
      * 게시글 삭제
      * @param id 게시글 ID
+     * @param authentication 유저 정보
      * @return
      */
     @GetMapping("/{id}/remove")
-    public String boardRemove(@PathVariable Long id) {
+    public String boardRemove(@PathVariable Long id, Authentication authentication) {
+        UserDetails userDetails = (UserDetails) authentication.getPrincipal();
+        BoardResponseDTO result = boardService.boardDetail(id);
+        if (result.getEmail() != userDetails.getUsername()) {
+            return "redirect:/";
+        }
+
         boardService.boardRemove(id);
 
         return "redirect:/";
