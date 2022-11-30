@@ -37,7 +37,7 @@ public class BoardController {
         UserDetails userDetails = (UserDetails) authentication.getPrincipal();
         boardService.saveBoard(boardWriteRequestDTO, userDetails.getUsername());
 
-        return "/home";
+        return "redirect:/";
     }
 
     /**
@@ -80,6 +80,18 @@ public class BoardController {
     public String boardUpdate(@PathVariable Long id, BoardWriteRequestDTO boardWriteRequestDTO) {
         boardService.boardUpdate(id, boardWriteRequestDTO);
 
-        return "redirect:/board/{id}}";
+        return "redirect:/board/" + id;
+    }
+
+    /**
+     * 게시글 삭제
+     * @param id 게시글 ID
+     * @return
+     */
+    @GetMapping("/{id}/remove")
+    public String boardRemove(@PathVariable Long id) {
+        boardService.boardRemove(id);
+
+        return "redirect:/";
     }
 }

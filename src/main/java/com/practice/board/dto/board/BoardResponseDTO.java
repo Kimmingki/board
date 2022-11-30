@@ -11,6 +11,7 @@ import java.time.LocalDateTime;
 @NoArgsConstructor
 public class BoardResponseDTO {
 
+    private Long id;
     private String title;
     private String content;
     private LocalDateTime createdAt;
@@ -19,6 +20,7 @@ public class BoardResponseDTO {
 
     @Builder
     public BoardResponseDTO(Board board) {
+        this.id = board.getId();
         this.title = board.getTitle();
         this.content = board.getContent();
         this.createdAt = board.getCreatedAt();

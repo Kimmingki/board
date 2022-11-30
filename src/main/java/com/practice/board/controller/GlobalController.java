@@ -1,7 +1,9 @@
 package com.practice.board.controller;
 
+import com.practice.board.dto.board.BoardResponseDTO;
 import com.practice.board.dto.member.MemberSaveRequestDTO;
 import com.practice.board.service.GlobalService;
+import com.practice.board.service.board.BoardService;
 import com.practice.board.validator.CheckEmailValidator;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -14,6 +16,7 @@ import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.PostMapping;
 
 import javax.validation.Valid;
+import java.util.List;
 
 @Controller
 @RequiredArgsConstructor
@@ -21,6 +24,7 @@ import javax.validation.Valid;
 public class GlobalController {
 
     private final GlobalService globalService;
+    private final BoardService boardService;
     private final CheckEmailValidator checkEmailValidator;
 
     /* 중복 검사 */
@@ -34,7 +38,10 @@ public class GlobalController {
      * @return 홈 페이지
      */
     @GetMapping("/")
-    public String Home() {
+    public String Home(Model model) {
+        List<BoardResponseDTO> dto = boardService.boardList();
+        model.addAttribute("boardList", dto);
+
         return "home";
     }
 

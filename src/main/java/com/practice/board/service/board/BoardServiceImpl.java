@@ -10,6 +10,9 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @Service
 @RequiredArgsConstructor
 public class BoardServiceImpl implements BoardService{
@@ -41,11 +44,32 @@ public class BoardServiceImpl implements BoardService{
     }
 
     @Override
+    public List<BoardResponseDTO> boardList() {
+        List<Board> boards = boardRepository.findAll();
+        List<BoardResponseDTO> boardDTOs = new ArrayList<>();
+
+        for (Board board : boards) {
+            BoardResponseDTO result = BoardResponseDTO.builder()
+                    .board(board)
+                    .build();
+            boardDTOs.add(result);
+        }
+
+        return boardDTOs;
+    }
+
+    @Override
     public Long boardUpdate(Long id, BoardWriteRequestDTO boardWriteRequestDTO) {
         Board board = boardRepository.findById(id).orElseThrow(() -> new IllegalArgumentException("존재하지 않는 게시글입니다."));
         board.update(boardWriteRequestDTO.getTitle(), boardWriteRequestDTO.getContent());
         boardRepository.save(board);
 
         return board.getId();
+    }
+
+    @Override
+    public void boardRemove(Long id) {
+        Board board = boardRepository.findById(id).orElseThrow(() -> new IllegalArgumentException("존재하지 않는 게시글입니다."));
+        boardRepository.delete(board);
     }
 }

@@ -10,7 +10,7 @@
     <h1 class="mt-4">Board</h1>
     <div class="card mb-4">
         <div class="card-body">
-            <from>
+            <form>
                 <div class="mb-3">
                     <label for="title" class="form-label">title</label>
                     <input type="text" class="form-control" id="title" name="title" th:value="${dto.title}" disabled>
@@ -34,7 +34,7 @@
                     <a th:href="@{/board/{id}/update(id=${id})}" class="btn btn-outline-warning">modify</a>
                     <a th:href="@{/board/{id}/remove(id=${id})}" class="btn btn-outline-danger" onclick="return confirm('삭제하시겠습니까?')">remove</a>
                 </th:block>
-            </from>
+            </form>
         </div>
     </div>
 </div>

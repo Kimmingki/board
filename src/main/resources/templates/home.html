@@ -8,7 +8,24 @@
 </head>
 <body>
 <div class="container" layout:fragment="content">
-
+    <table class="table table-bordered">
+        <thead>
+        <tr>
+            <th class="col-md-1">번호</th>
+            <th class="col-md-1">제목</th>
+            <th class="col-md-1">작성자</th>
+            <th class="col-md-1">작성일</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="board : ${boardList}">
+            <td th:text="${board.id}"></td>
+            <td><a th:href="@{/board/{id}(id=${board.id})}" th:text="${board.title}"></a></td>
+            <td th:text="${board.username}"></td>
+            <td th:text="${board.createdAt} ? ${#temporals.format(board.createdAt,'yyyy-MM-dd HH:mm')} : ${board.createdAt}"></td>
+        </tr>
+        </tbody>
+    </table>
 </div>
 </body>
 </html>
