@@ -7,6 +7,9 @@ import com.practice.board.dto.board.BoardWriteRequestDTO;
 import com.practice.board.repository.BoardRepository;
 import com.practice.board.repository.MemberRepository;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageImpl;
+import org.springframework.data.domain.Pageable;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
@@ -44,8 +47,8 @@ public class BoardServiceImpl implements BoardService{
     }
 
     @Override
-    public List<BoardResponseDTO> boardList() {
-        List<Board> boards = boardRepository.findAll();
+    public Page<BoardResponseDTO> boardList(Pageable pageable) {
+        Page<Board> boards = boardRepository.findAll(pageable);
         List<BoardResponseDTO> boardDTOs = new ArrayList<>();
 
         for (Board board : boards) {
@@ -55,7 +58,7 @@ public class BoardServiceImpl implements BoardService{
             boardDTOs.add(result);
         }
 
-        return boardDTOs;
+        return new PageImpl<>(boardDTOs, pageable, boards.getTotalElements());
     }
 
     @Override

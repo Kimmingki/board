@@ -7,6 +7,9 @@ import com.practice.board.service.board.BoardService;
 import com.practice.board.validator.CheckEmailValidator;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
+import org.springframework.data.web.PageableDefault;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.Errors;
@@ -38,9 +41,8 @@ public class GlobalController {
      * @return 홈 페이지
      */
     @GetMapping("/")
-    public String Home(Model model) {
-        List<BoardResponseDTO> dto = boardService.boardList();
-        model.addAttribute("boardList", dto);
+    public String Home(Model model, @PageableDefault(page = 0, size = 10, sort = "id", direction = Sort.Direction.DESC)Pageable pageable) {
+        model.addAttribute("boardList", boardService.boardList(pageable));
 
         return "home";
     }

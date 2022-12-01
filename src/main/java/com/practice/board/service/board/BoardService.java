@@ -2,6 +2,8 @@ package com.practice.board.service.board;
 
 import com.practice.board.dto.board.BoardResponseDTO;
 import com.practice.board.dto.board.BoardWriteRequestDTO;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 
 import java.util.List;
 
@@ -24,9 +26,10 @@ public interface BoardService {
 
     /**
      * 게시글 전체조회
-     * @return
+     * @param pageable 페이징 처리
+     * @return 게시글 목록 (페이징)
      */
-    List<BoardResponseDTO> boardList();
+    Page<BoardResponseDTO> boardList(Pageable pageable);
 
     /**
      * 게시글 수정

@@ -96,7 +96,7 @@ public class MemberController {
      */
     @GetMapping("/update/password")
     public String updatePasswordForm() {
-        return "/members/updatePassword";
+        return "/member/updatePassword";
     }
 
     /**
@@ -122,7 +122,7 @@ public class MemberController {
         if (result == null) {
             model.addAttribute("dto", memberPasswordUpdateDTO);
             model.addAttribute("wrongPassword", "비밀번호가 맞지 않습니다.");
-            return "/members/updatePassword";
+            return "/member/updatePassword";
         }
 
         return "redirect:/member/info";
@@ -134,7 +134,7 @@ public class MemberController {
      */
     @GetMapping("/withdrawal")
     public String memberWithdrawalForm() {
-        return "/members/withdrawal";
+        return "/member/withdrawal";
     }
 
     /**
