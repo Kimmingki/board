@@ -85,7 +85,7 @@ public class GlobalController {
         }
         globalService.join(memberSaveRequestDTO);
 
-        return "home";
+        return "redirect:/";
     }
 
     /**
