@@ -41,7 +41,7 @@ public class GlobalController {
      * @return 홈 페이지
      */
     @GetMapping("/")
-    public String Home(Model model, @PageableDefault(page = 0, size = 10, sort = "id", direction = Sort.Direction.DESC)Pageable pageable) {
+    public String Home(Model model, @PageableDefault(page = 0, size = 15, sort = "id", direction = Sort.Direction.DESC)Pageable pageable) {
         model.addAttribute("boardList", boardService.boardList(pageable));
 
         return "home";
