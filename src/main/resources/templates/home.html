@@ -27,9 +27,37 @@
         </tbody>
     </table>
 
+    <div th:if="${!boardList.isEmpty()}">
+        <ul class="pagination"
+            th:with="
+                pageNumber = ${boardList.pageable.pageNumber},
+                pageSize = ${boardList.pageable.pageSize},
+                totalPages = ${boardList.totalPages},
+                startPage = ${T(java.lang.Math).floor(pageNumber / pageSize) * pageSize + 1},
+                tempEndPage = ${startPage + pageSize - 1},
+                endPage = (${tempEndPage < totalPages ? tempEndPage : totalPages})">
+
+            <li th:classappend="${boardList.first} ? 'disabled'" class="page-item">
+                <a class="page-link" th:href="${boardList.first} ? '#' : @{/(page=${pageNumber - 1})}" aria-label="Previous">
+                    <span aria-hidden="true">&lt;</span>
+                </a>
+            </li>
+
+            <li th:each="page: ${#numbers.sequence(startPage, endPage)}" th:classappend="${page == pageNumber + 1} ? 'active'" class="page-item">
+                <a th:text="${page}" class="page-link" th:href="@{/(page=${page - 1})}"></a>
+            </li>
+
+            <li th:classappend="${boardList.last} ? 'disabled'" class="page-item">
+                <a class="page-link" th:href="${boardList.last} ? '#' : @{/(page=${pageNumber + 1})}" aria-label="Next">
+                    <span aria-hidden="true">&gt;</span>
+                </a>
+            </li>
+        </ul>
+    </div>
+
     <script th:inline="javascript">
         /*<![CDATA[*/
-        console.log([[${boardList}]]);
+        const boardList = [[${boardList}]];
         /*]]>*/
     </script>
 </div>

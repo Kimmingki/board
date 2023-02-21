@@ -1,6 +1,5 @@
 package com.practice.board.controller;
 
-import com.practice.board.dto.board.BoardResponseDTO;
 import com.practice.board.dto.member.MemberSaveRequestDTO;
 import com.practice.board.service.GlobalService;
 import com.practice.board.service.board.BoardService;
@@ -19,7 +18,6 @@ import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.PostMapping;
 
 import javax.validation.Valid;
-import java.util.List;
 
 @Controller
 @RequiredArgsConstructor
@@ -41,7 +39,7 @@ public class GlobalController {
      * @return 홈 페이지
      */
     @GetMapping("/")
-    public String Home(Model model, @PageableDefault(page = 0, size = 15, sort = "id", direction = Sort.Direction.DESC)Pageable pageable) {
+    public String Home(Model model, @PageableDefault(page = 0, size = 10, sort = "id", direction = Sort.Direction.DESC)Pageable pageable) {
         model.addAttribute("boardList", boardService.boardList(pageable));
 
         return "home";
