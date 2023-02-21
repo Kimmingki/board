@@ -5,7 +5,6 @@ import com.practice.board.dto.board.BoardWriteRequestDTO;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
-import java.util.List;
 
 public interface BoardService {
 
