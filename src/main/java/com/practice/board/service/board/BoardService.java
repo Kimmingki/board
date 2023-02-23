@@ -31,6 +31,14 @@ public interface BoardService {
     Page<BoardResponseDTO> boardList(Pageable pageable);
 
     /**
+     * 게시글 검색
+     * @param keyword 검색어
+     * @param pageable 페이징 처리
+     * @return 검색 된 게시글 목록 (페이징)
+     */
+    Page<BoardResponseDTO> searchingBoardList(String keyword, Pageable pageable);
+
+    /**
      * 게시글 수정
      * @param id 게시글 ID
      * @param boardWriteRequestDTO 수정 정보

@@ -49,6 +49,16 @@ public class BoardServiceImpl implements BoardService{
     @Override
     public Page<BoardResponseDTO> boardList(Pageable pageable) {
         Page<Board> boards = boardRepository.findAll(pageable);
+        return getBoardResponseDTOS(pageable, boards);
+    }
+
+    @Override
+    public Page<BoardResponseDTO> searchingBoardList(String keyword, Pageable pageable) {
+        Page<Board> boards = boardRepository.findByTitle(keyword, pageable);
+        return getBoardResponseDTOS(pageable, boards);
+    }
+
+    private Page<BoardResponseDTO> getBoardResponseDTOS(Pageable pageable, Page<Board> boards) {
         List<BoardResponseDTO> boardDTOs = new ArrayList<>();
 
         for (Board board : boards) {

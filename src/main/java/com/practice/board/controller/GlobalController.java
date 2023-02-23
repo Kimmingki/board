@@ -39,8 +39,12 @@ public class GlobalController {
      * @return 홈 페이지
      */
     @GetMapping("/")
-    public String Home(Model model, @PageableDefault(page = 0, size = 10, sort = "id", direction = Sort.Direction.DESC)Pageable pageable) {
-        model.addAttribute("boardList", boardService.boardList(pageable));
+    public String home(Model model, @PageableDefault(page = 0, size = 10, sort = "id", direction = Sort.Direction.DESC)Pageable pageable, String keyword) {
+        if(keyword == null) {
+            model.addAttribute("boardList", boardService.boardList(pageable));
+        } else {
+            model.addAttribute("boardList", boardService.searchingBoardList(keyword, pageable));
+        }
 
         return "home";
     }
@@ -60,7 +64,7 @@ public class GlobalController {
      */
     @GetMapping("/signup")
     public String signupForm() {
-        return "members/memberForm";
+        return "member/memberForm";
     }
 
     /**
