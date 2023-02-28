@@ -54,7 +54,13 @@ public class SecurityConfig {
                     .deleteCookies("JSESSIONID");
 
         // status code 핸들링
-        http.exceptionHandling().accessDeniedPage("/denied");
+        http.exceptionHandling()
+                .authenticationEntryPoint((request, response, authException) -> {
+                    response.sendRedirect("/login");
+                })
+                .accessDeniedHandler((request, response, accessDeniedException) -> {
+                    response.sendRedirect("/denied");
+                });
 
         return http.build();
     }

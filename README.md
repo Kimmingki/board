@@ -41,4 +41,5 @@ https://magicmk.tistory.com/category/Java/spring%20%EA%B2%8C%EC%8B%9C%ED%8C%90
    - 페이징 처리 (완료)
  - 댓글 (진행중)
  - 이미지
- - 권한 부여 (진행중)
+ - 권한 부여 (완료)
+ - 예외 처리
