@@ -9,7 +9,7 @@ public interface CommentService {
      * @param commentRequestDTO 댓글 정보
      * @param boardId 게시물
      * @param email 작성자
-     * @return
+     * @return 댓글 ID
      */
     Long writeComment(CommentRequestDTO commentRequestDTO, Long boardId, String email);
 }

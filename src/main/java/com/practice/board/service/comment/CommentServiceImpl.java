@@ -4,6 +4,7 @@ import com.practice.board.domain.Board;
 import com.practice.board.domain.Comment;
 import com.practice.board.domain.Member;
 import com.practice.board.dto.comment.CommentRequestDTO;
+import com.practice.board.dto.comment.CommentResponseDTO;
 import com.practice.board.repository.BoardRepository;
 import com.practice.board.repository.CommentRepository;
 import com.practice.board.repository.MemberRepository;

@@ -39,13 +39,30 @@
             <div class="card my-4">
                 <h5 class="card-header">Leave a Comment:</h5>
                 <div class="card-body">
-                    <form>
-                        <div class="form-group">
+                    <form th:action="@{/board/{id}/comment(id=${id})}" th:method="post">
+                        <div class="form-group" style="margin-bottom: 10px;">
                             <input type="hidden" name="idx" th:value="*{idx}" />
                             <textarea name="content" class="form-control" rows="3"></textarea>
                         </div>
                         <button type="submit" class="btn btn-primary">Submit</button>
                     </form>
+                </div>
+            </div>
+
+            <!-- Display Comments -->
+            <div class="card my-4">
+                <h5 class="card-header">Comments:</h5>
+                <div class="card-body">
+                    <div th:each="comment : ${comments}">
+                        <div class="media mb-4">
+                            <img class="d-flex mr-3 rounded-circle" th:src="${comment.userImage}" alt="User image" width="50">
+                            <div class="media-body">
+                                <h5 class="mt-0" th:text="${comment.userName}">User Name</h5>
+                                <p th:text="${comment.content}">Comment content</p>
+                                <small class="text-muted" th:text="${#temporals.format(comment.createdAt, 'yyyy-MM-dd HH:mm')}">Comment Date</small>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
