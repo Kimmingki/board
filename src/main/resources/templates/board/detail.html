@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org"
+<html lang="kr" xmlns:th="http://www.thymeleaf.org"
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
       layout:decorate="~{layout/default}">
 <head>
@@ -50,23 +50,30 @@
             </div>
 
             <!-- Display Comments -->
-            <div class="card my-4">
-                <h5 class="card-header">Comments:</h5>
-                <div class="card-body">
-                    <div th:each="comment : ${comments}">
-                        <div class="media mb-4">
-                            <img class="d-flex mr-3 rounded-circle" th:src="${comment.userImage}" alt="User image" width="50">
-                            <div class="media-body">
-                                <h5 class="mt-0" th:text="${comment.userName}">User Name</h5>
-                                <p th:text="${comment.content}">Comment content</p>
-                                <small class="text-muted" th:text="${#temporals.format(comment.createdAt, 'yyyy-MM-dd HH:mm')}">Comment Date</small>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
+<!--            <div class="card my-4">-->
+<!--                <h5 class="card-header">Comments:</h5>-->
+<!--                <div class="card-body">-->
+<!--                    <div th:each="comment : ${comments}">-->
+<!--                        <div class="media mb-4">-->
+<!--                            <img class="d-flex mr-3 rounded-circle" th:src="${comment.userImage}" alt="User image" width="50">-->
+<!--                            <div class="media-body">-->
+<!--                                <h5 class="mt-0" th:text="${comment.userName}">User Name</h5>-->
+<!--                                <p th:text="${comment.content}">Comment content</p>-->
+<!--                                <small class="text-muted" th:text="${#temporals.format(comment.createdAt, 'yyyy-MM-dd HH:mm')}">Comment Date</small>-->
+<!--                            </div>-->
+<!--                        </div>-->
+<!--                    </div>-->
+<!--                </div>-->
+<!--            </div>-->
         </div>
     </div>
 </div>
+<script th:inline="javascript">
+    /*<![CDATA[*/
+        const comments = `[[${comments}]]`;
+    /*]]>*/
+
+    console.log(comments);
+</script>
 </body>
 </html>

@@ -1,6 +1,7 @@
 package com.practice.board.service.comment;
 
 import com.practice.board.dto.comment.CommentRequestDTO;
+import com.practice.board.dto.comment.CommentResponseDTO;
 
 public interface CommentService {
 
@@ -12,4 +13,6 @@ public interface CommentService {
      * @return 댓글 ID
      */
     Long writeComment(CommentRequestDTO commentRequestDTO, Long boardId, String email);
+
+    CommentResponseDTO commentList(Long id);
 }

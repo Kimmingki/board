@@ -2,7 +2,9 @@ package com.practice.board.controller;
 
 import com.practice.board.dto.board.BoardResponseDTO;
 import com.practice.board.dto.board.BoardWriteRequestDTO;
+import com.practice.board.dto.comment.CommentResponseDTO;
 import com.practice.board.service.board.BoardService;
+import com.practice.board.service.comment.CommentService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -16,6 +18,7 @@ import org.springframework.web.bind.annotation.*;
 public class BoardController {
 
     private final BoardService boardService;
+    private final CommentService commentService;
 
     /**
      * 게시글 작성
@@ -49,6 +52,9 @@ public class BoardController {
     @GetMapping("/{id}")
     public String boardDetail(@PathVariable Long id, Model model) {
         BoardResponseDTO result = boardService.boardDetail(id);
+        CommentResponseDTO commentResponseDTO = commentService.commentList(id);
+
+        model.addAttribute("comments", commentResponseDTO);
         model.addAttribute("dto", result);
         model.addAttribute("id", id);
 

@@ -33,4 +33,13 @@ public class CommentServiceImpl implements CommentService{
 
         return result.getId();
     }
+
+    @Override
+    public CommentResponseDTO commentList(Long id) {
+        Comment comment = commentRepository.findByBoard(id);
+
+        return CommentResponseDTO.builder()
+                .comment(comment)
+                .build();
+    }
 }
