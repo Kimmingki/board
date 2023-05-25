@@ -12,6 +12,9 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+import java.util.stream.Collectors;
+
 @Service
 @RequiredArgsConstructor
 public class CommentServiceImpl implements CommentService{
@@ -35,11 +38,14 @@ public class CommentServiceImpl implements CommentService{
     }
 
     @Override
-    public CommentResponseDTO commentList(Long id) {
-        Comment comment = commentRepository.findByBoard(id);
+    public List<CommentResponseDTO> commentList(Long id) {
+        Board board = boardRepository.findById(id).orElseThrow(() -> new IllegalArgumentException("게시물을 찾을 수 없습니다."));
+        List<Comment> comments = commentRepository.findByBoard(board);
 
-        return CommentResponseDTO.builder()
-                .comment(comment)
-                .build();
+        return comments.stream()
+                .map(comment -> CommentResponseDTO.builder()
+                        .comment(comment)
+                        .build())
+                .collect(Collectors.toList());
     }
 }

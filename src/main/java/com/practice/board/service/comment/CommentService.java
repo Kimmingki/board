@@ -3,6 +3,8 @@ package com.practice.board.service.comment;
 import com.practice.board.dto.comment.CommentRequestDTO;
 import com.practice.board.dto.comment.CommentResponseDTO;
 
+import java.util.List;
+
 public interface CommentService {
 
     /**
@@ -14,5 +16,10 @@ public interface CommentService {
      */
     Long writeComment(CommentRequestDTO commentRequestDTO, Long boardId, String email);
 
-    CommentResponseDTO commentList(Long id);
+    /**
+     * 댓글 조회
+     * @param id 게시물
+     * @return 게시물 별 댓글
+     */
+    List<CommentResponseDTO> commentList(Long id);
 }

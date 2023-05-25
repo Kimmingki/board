@@ -6,16 +6,22 @@ import com.practice.board.dto.comment.CommentResponseDTO;
 import com.practice.board.service.board.BoardService;
 import com.practice.board.service.comment.CommentService;
 import lombok.RequiredArgsConstructor;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @Controller
 @RequiredArgsConstructor
 @RequestMapping("/board")
 public class BoardController {
+
+    private static final Logger logger = LoggerFactory.getLogger(BoardController.class);
 
     private final BoardService boardService;
     private final CommentService commentService;
@@ -52,7 +58,7 @@ public class BoardController {
     @GetMapping("/{id}")
     public String boardDetail(@PathVariable Long id, Model model) {
         BoardResponseDTO result = boardService.boardDetail(id);
-        CommentResponseDTO commentResponseDTO = commentService.commentList(id);
+        List<CommentResponseDTO> commentResponseDTO = commentService.commentList(id);
 
         model.addAttribute("comments", commentResponseDTO);
         model.addAttribute("dto", result);
