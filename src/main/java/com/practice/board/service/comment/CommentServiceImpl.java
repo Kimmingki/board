@@ -48,4 +48,14 @@ public class CommentServiceImpl implements CommentService{
                         .build())
                 .collect(Collectors.toList());
     }
+
+    @Override
+    public void updateComment(CommentRequestDTO commentRequestDTO, Long commentId) {
+
+    }
+
+    @Override
+    public void deleteComment(Long commentId) {
+        commentRepository.deleteById(commentId);
+    }
 }

@@ -6,6 +6,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
@@ -27,6 +28,12 @@ public class CommentController {
         UserDetails userDetails = (UserDetails) authentication.getPrincipal();
         commentService.writeComment(commentRequestDTO, id, userDetails.getUsername());
 
+        return "redirect:/board/" + id;
+    }
+
+    @GetMapping("/board/{id}/comment/{commentId}/remove")
+    public String deleteComment(@PathVariable Long id, @PathVariable Long commentId) {
+        commentService.deleteComment(commentId);
         return "redirect:/board/" + id;
     }
 }

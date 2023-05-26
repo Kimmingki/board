@@ -15,6 +15,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Objects;
 
 @Controller
 @RequiredArgsConstructor
@@ -111,7 +112,7 @@ public class BoardController {
     public String boardRemove(@PathVariable Long id, Authentication authentication) {
         UserDetails userDetails = (UserDetails) authentication.getPrincipal();
         BoardResponseDTO result = boardService.boardDetail(id);
-        if (result.getEmail() != userDetails.getUsername()) {
+        if (!Objects.equals(result.getEmail(), userDetails.getUsername())) {
             return "redirect:/";
         }
 

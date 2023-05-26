@@ -22,4 +22,17 @@ public interface CommentService {
      * @return 게시물 별 댓글
      */
     List<CommentResponseDTO> commentList(Long id);
+
+    /**
+     * 댓글 수정
+     * @param commentRequestDTO 댓글 정보
+     * @param commentId 댓글 ID
+     */
+    void updateComment(CommentRequestDTO commentRequestDTO, Long commentId);
+
+    /**
+     * 댓글 삭제
+     * @param commentId 댓글 ID
+     */
+    void deleteComment(Long commentId);
 }

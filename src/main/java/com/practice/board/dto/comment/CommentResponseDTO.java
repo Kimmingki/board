@@ -13,14 +13,18 @@ public class CommentResponseDTO {
 
     private LocalDateTime createdAt;
     private LocalDateTime updatedAt;
+    private Long id;
     private String content;
     private String username;
+    private String email;
 
     @Builder
     public CommentResponseDTO(Comment comment) {
         this.createdAt = comment.getCreatedAt();
         this.updatedAt = comment.getUpdatedAt();
+        this.id = comment.getId();
         this.content = comment.getContent();
         this.username = comment.getMember().getUsername();
+        this.email = comment.getMember().getEmail();
     }
 }
