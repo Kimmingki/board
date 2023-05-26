@@ -51,7 +51,9 @@ public class CommentServiceImpl implements CommentService{
 
     @Override
     public void updateComment(CommentRequestDTO commentRequestDTO, Long commentId) {
-
+        Comment comment = commentRepository.findById(commentId).orElseThrow(() -> new IllegalArgumentException("존재하지 않는 댓글입니다."));
+        comment.update(commentRequestDTO.getContent());
+        commentRepository.save(comment);
     }
 
     @Override
