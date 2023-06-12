@@ -1,9 +1,11 @@
 package com.practice.board.controller;
 
+import com.practice.board.dto.image.ImageResponseDTO;
 import com.practice.board.dto.member.MemberPasswordUpdateDTO;
 import com.practice.board.dto.member.MemberResponseDTO;
 import com.practice.board.dto.member.MemberUsernameUpdateDTO;
 import com.practice.board.service.GlobalService;
+import com.practice.board.service.image.ImageService;
 import com.practice.board.service.member.MemberService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -26,6 +28,7 @@ public class MemberController {
 
     private final GlobalService globalService;
     private final MemberService memberService;
+    private final ImageService imageService;
 
     /**
      * 회원 목록 조회
@@ -50,7 +53,10 @@ public class MemberController {
     public String memberInfo(Model model, Authentication authentication) {
         UserDetails userDetails = (UserDetails) authentication.getPrincipal();
         MemberResponseDTO member = memberService.findMember(userDetails.getUsername());
+        ImageResponseDTO image = imageService.findImage(userDetails.getUsername());
+
         model.addAttribute("member", member);
+        model.addAttribute("image", image);
 
         return "/member/info";
     }

@@ -9,5 +9,10 @@ import java.util.Optional;
 
 public interface CommentRepository extends JpaRepository<Comment, Long> {
 
+    /**
+     * Board로 Comment 조회
+     * @param board 게시물 정보
+     * @return 댓글 리스트
+     */
     List<Comment> findByBoard(Board board);
 }

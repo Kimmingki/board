@@ -44,5 +44,7 @@ https://magicmk.tistory.com/category/Java/spring%20%EA%B2%8C%EC%8B%9C%ED%8C%90
    - 댓글 조회 (완료)
    - 댓글 수정 (완료)
  - 이미지
+   - 프로필 사진 (진행중)
+   - 게시물 이미지 등록
  - 권한 부여 (완료)
  - 에러 페이지 (완료)
