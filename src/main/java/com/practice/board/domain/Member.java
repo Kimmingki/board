@@ -29,6 +29,9 @@ public class Member extends  BaseEntity{
     @Enumerated(EnumType.STRING)
     private Role role;
 
+    @OneToOne(mappedBy = "member", fetch = FetchType.LAZY)
+    private Image image;
+
     public void updateUsername(String username) {
         this.username = username;
     }

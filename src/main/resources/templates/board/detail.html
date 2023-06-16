@@ -55,11 +55,15 @@
                 <div class="card-body">
                     <div th:each="comment : ${comments}">
                         <div class="media mb-4">
-<!--                            <img class="d-flex mr-3 rounded-circle" th:src="${comment.userImage}" alt="User image" width="50">-->
                             <div class="media-body">
-                                <h5 class="mt-0" th:text="${comment.getUsername()}">User Name</h5>
-                                <p th:text="${comment.getContent()}" th:id="'comment-' + ${comment.getId()}">Comment content</p>
-                                <small class="text-muted" th:text="${#temporals.format(comment.getCreatedAt(), 'yyyy-MM-dd HH:mm')}">Comment Date</small>
+                                <div class="d-flex align-items-start">
+                                    <img class="d-flex mr-3 rounded-circle" th:src="${comment.getImageUrl()}" alt="User image" width="50">
+                                    <div>
+                                        <h5 class="mt-0" th:text="${comment.getUsername()}">User Name</h5>
+                                        <p th:text="${comment.getContent()}" th:id="'comment-' + ${comment.getId()}">Comment content</p>
+                                        <small class="text-muted" th:text="${#temporals.format(comment.getCreatedAt(), 'yyyy-MM-dd HH:mm')}">Comment Date</small>
+                                    </div>
+                                </div>
                                 <div th:if="${comment.getEmail() == #authentication.principal.username}">
                                     <button class="btn btn-sm btn-outline-warning" th:attr="data-id=${comment.getId()}" onclick="editComment(this)">Edit</button>
                                     <a th:href="@{/board/{id}/comment/{commentId}/remove(id=${id}, commentId=${comment.getId()})}" class="btn btn-sm btn-outline-danger" onclick="return confirm('Delete this comment?')">Delete</a>

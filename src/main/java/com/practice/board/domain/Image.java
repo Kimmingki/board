@@ -22,7 +22,7 @@ public class Image {
     @Column(nullable = false)
     private String url;
 
-    @OneToOne
+    @OneToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "MEMBER_ID")
     private Member member;
 

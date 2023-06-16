@@ -1,8 +1,10 @@
 package com.practice.board.service;
 
+import com.practice.board.domain.Image;
 import com.practice.board.domain.Member;
 import com.practice.board.domain.Role;
 import com.practice.board.dto.member.MemberSaveRequestDTO;
+import com.practice.board.repository.ImageRepository;
 import com.practice.board.repository.MemberRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -20,6 +22,7 @@ import java.util.Map;
 public class GlobalServiceImpl implements GlobalService {
 
     private final MemberRepository memberRepository;
+    private final ImageRepository imageRepository;
     private final PasswordEncoder passwordEncoder;
 
     @Transactional(readOnly = true)
@@ -45,6 +48,7 @@ public class GlobalServiceImpl implements GlobalService {
     }
 
     @Override
+    @Transactional
     public Long join(MemberSaveRequestDTO memberSaveRequestDTO) {
         memberSaveRequestDTO.setPassword(passwordEncoder.encode(memberSaveRequestDTO.getPassword()));
 
@@ -55,6 +59,14 @@ public class GlobalServiceImpl implements GlobalService {
                 .role(Role.ROLE_USER)
                 .build();
 
-        return memberRepository.save(member).getId();
+        Image image = Image.builder()
+                .url("/profileImages/anonymous.png")
+                .member(member)
+                .build();
+
+        Long id = memberRepository.save(member).getId();
+        imageRepository.save(image);
+
+        return id;
     }
 }

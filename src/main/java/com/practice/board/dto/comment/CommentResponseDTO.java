@@ -17,6 +17,7 @@ public class CommentResponseDTO {
     private String content;
     private String username;
     private String email;
+    private String imageUrl;
 
     @Builder
     public CommentResponseDTO(Comment comment) {
@@ -26,5 +27,6 @@ public class CommentResponseDTO {
         this.content = comment.getContent();
         this.username = comment.getMember().getUsername();
         this.email = comment.getMember().getEmail();
+        this.imageUrl = comment.getMember().getImage().getUrl();
     }
 }
