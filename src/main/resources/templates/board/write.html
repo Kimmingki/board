@@ -7,7 +7,7 @@
 </head>
 <body>
 <div class="container" layout:fragment="content">
-    <form method="post">
+    <form method="post" enctype="multipart/form-data">
         <div class="form-group">
             <label class="form-label mt-4">게시글 작성</label>
             <div class="form-floating mb-3">
@@ -17,6 +17,10 @@
             <div class="form-floating mb-3">
                 <textarea name="content" class="form-control" id="content" rows="3" style="height: 500px;" required></textarea>
                 <label for="content">내용</label>
+            </div>
+            <div class="form-floating mb-3">
+                <input type="file" name="files" class="form-control" id="files" multiple>
+                <label for="files">이미지 업로드</label>
             </div>
         </div>
         <button type="submit" class="btn btn-primary">등록</button>

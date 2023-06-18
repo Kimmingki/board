@@ -2,6 +2,7 @@ package com.practice.board.service.board;
 
 import com.practice.board.dto.board.BoardResponseDTO;
 import com.practice.board.dto.board.BoardWriteRequestDTO;
+import com.practice.board.dto.image.BoardImageUploadDTO;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
@@ -14,7 +15,9 @@ public interface BoardService {
      * @param email 작성자
      * @return 게시글 ID
      */
-    Long saveBoard(BoardWriteRequestDTO boardWriteRequestDTO, String email);
+    Long saveBoard(BoardWriteRequestDTO boardWriteRequestDTO,
+                   BoardImageUploadDTO boardImageUploadDTO,
+                   String email);
 
     /**
      * 게시글 상세조회

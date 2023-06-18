@@ -19,6 +19,14 @@
                     <label for="content" class="form-label">content</label>
                     <textarea class="form-control" id="content" name="content" disabled>[[${dto.content}]]</textarea>
                 </div>
+                <div class="mb-3" th:if="${dto.imageUrls != null}">
+                    <label class="form-label">Images</label>
+                    <div>
+                        <th:block th:each="imageUrl : ${dto.imageUrls}">
+                            <img th:src="${imageUrl}" alt="Image" width="200px" height="200px">
+                        </th:block>
+                    </div>
+                </div>
                 <div class="mb-3">
                     <label for="createdAt" class="form-label">작성일</label> <input
                         type="text" class="form-control" id="createdAt" name="createdAt"

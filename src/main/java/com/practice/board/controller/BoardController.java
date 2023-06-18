@@ -3,6 +3,7 @@ package com.practice.board.controller;
 import com.practice.board.dto.board.BoardResponseDTO;
 import com.practice.board.dto.board.BoardWriteRequestDTO;
 import com.practice.board.dto.comment.CommentResponseDTO;
+import com.practice.board.dto.image.BoardImageUploadDTO;
 import com.practice.board.service.board.BoardService;
 import com.practice.board.service.comment.CommentService;
 import lombok.RequiredArgsConstructor;
@@ -43,9 +44,13 @@ public class BoardController {
      * @return 게시글 디테일 페이지
      */
     @PostMapping("/write")
-    public String write(BoardWriteRequestDTO boardWriteRequestDTO, Authentication authentication) {
+    public String write(BoardWriteRequestDTO boardWriteRequestDTO,
+                        @ModelAttribute BoardImageUploadDTO boardImageUploadDTO,
+                        Authentication authentication) {
+
+        logger.info("boardImageDTO is {}", boardImageUploadDTO);
         UserDetails userDetails = (UserDetails) authentication.getPrincipal();
-        boardService.saveBoard(boardWriteRequestDTO, userDetails.getUsername());
+        boardService.saveBoard(boardWriteRequestDTO, boardImageUploadDTO, userDetails.getUsername());
 
         return "redirect:/";
     }
